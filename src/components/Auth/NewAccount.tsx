@@ -4,7 +4,7 @@ import { FaFacebookF } from "react-icons/fa";
 import loginImage from "./AuthImage/mainlog.jpeg";
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { supabase } from "./supabaseClient";
+// import { supabase } from "./supabaseClient";
 export const NewAccount: React.FC = () => {
   const [value, setValue] = useState<string | undefined>("");
   const [email, setEmail] = useState<string | undefined>("");
