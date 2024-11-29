@@ -1,61 +1,26 @@
 import { Link } from "react-router-dom";
-import { ProductProps } from "./ProductInterface";
-import blue from "./ProductImages/bluesneaker.png";
-import sneakersOne from "./ProductImages/41di2jkf.png";
-import sneakerTwo from "./ProductImages/5kkvr25l.png";
-import coporateOne from './ProductImages/coporateshoes/17aao1oa.png';
-import coporateTwo from './ProductImages/coporateshoes/hx7mbu3n.png'
-import coporateThree from './ProductImages/coporateshoes/kvvrtzmd.png'
-import sandalsOne from './ProductImages/sandals/2badj3m7.png';
-import sandalsTwo from './ProductImages/sandals/3zalyi8v.png';
-import sandalsThree from './ProductImages/sandals/gyc93c6a.png';
+import { BiSearch } from "react-icons/bi";
+import { useState } from "react";
+import { ProductJson } from "./ProductJson";
 export const Shop: React.FC = () => {
-  let productArray: ProductProps[] = [
-    {
-      productImage: blue,
-      nameOfProduct: "Nike Bluesneaker",
-      ammountOfProduct: 200,
-    },
-    {
-      productImage: sneakersOne,
-      nameOfProduct: "black shoes",
-      ammountOfProduct: 150,
-    },
-    {
-      productImage: sneakerTwo,
-      nameOfProduct: "white sneaker",
-      ammountOfProduct: 100,
-    },
-    {
-      productImage: coporateOne,
-      nameOfProduct: 'Half Cover',
-      ammountOfProduct: 1000
-    },
-    {
-      productImage: coporateTwo,
-      nameOfProduct: 'full cover',
-      ammountOfProduct: 500
-    }, 
-    {
-      productImage: coporateThree,
-      nameOfProduct: 'Brown cover shoes',
-      ammountOfProduct: 1500
-    },
-    {
-      productImage: sandalsOne,
-      nameOfProduct: 'Black sandals',
-      ammountOfProduct: 1000
-    },
-    {
-      productImage: sandalsTwo,
-      nameOfProduct: 'black sandals',
-      ammountOfProduct: 500
-    }, {
-      productImage: sandalsThree,
-      nameOfProduct: 'Black sandals',
-      ammountOfProduct: 5000
-    }
-  ];
+  let productArray = ProductJson;
+  // Search Feature
+  const [searchItem, setSearchItem] = useState<string>("");
+  const [filteredShoes, setFilteredShoes] = useState(productArray);
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const searchTerm = e.target.value;
+    setSearchItem(searchTerm);
+    const filteredShoes = productArray.filter((product) =>
+      product.nameOfProduct
+        .toLowerCase()
+        .includes(searchItem.toLocaleLowerCase())
+    ); //
+    setFilteredShoes(filteredShoes);
+  };
+
+  const handleSearchLogic = () => {
+    
+  }
   return (
     <div>
       <div className="bg-gray-100 min-h-screen font-customNunito">
@@ -66,22 +31,42 @@ export const Shop: React.FC = () => {
               <h1 className="text-xl font-bold">Foot-finds</h1>
             </Link>
             <nav className="space-x-6">
-              <a href="#" className="text-gray-600 hover:text-black">
+              <Link to={"/newIn"} className="text-gray-600 hover:text-black">
                 New Shoes
-              </a>
-              <a href="#" className="text-gray-600 hover:text-black">
+              </Link>
+              <Link
+                to={"/coporateShoes"}
+                className="text-gray-600 hover:text-black"
+              >
                 Coporate shoes
-              </a>
-              <a href="#" className="text-gray-600 hover:text-black">
+              </Link>
+              <Link to={"/sneakers"} className="text-gray-600 hover:text-black">
                 Sneakers
-              </a>
-              <a href="#" className="text-gray-600 hover:text-black">
+              </Link>
+              <Link to={"/sandals"} className="text-gray-600 hover:text-black">
                 Sandals
-              </a>
-              <a href="#" className="text-gray-600 hover:text-black">
+              </Link>
+              <Link to={"/slides"} className="text-gray-600 hover:text-black">
                 Slides
-              </a>
+              </Link>
+              <Link to={"/cart"} className="text-gray-600 hover:text-black">
+                Cart
+              </Link>
             </nav>
+            <div className="flex">
+              <input
+                type="search"
+                className=" border-gray-400 border-2 rounded-l-lg outline-none px-2"
+                name=""
+                value={searchItem}
+                id="search-form"
+                placeholder="Type to search..."
+                onChange={handleSearch}
+              />
+              <button onClick={handleSearchLogic} className="bg-logo-orange rounded-r-lg p-[5px]">
+                <BiSearch className="text-2xl text-white " />
+              </button>
+            </div>
           </div>
         </header>
 
@@ -92,24 +77,33 @@ export const Shop: React.FC = () => {
             <h2 className="text-lg font-bold mb-4">Categories</h2>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="text-gray-600 hover:text-black">
+                <Link to={"/shop"} className="text-gray-600 hover:text-black">
                   All kinds of shoe
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-gray-600 hover:text-black">
+                <Link
+                  to={"/sneakers"}
+                  className="text-gray-600 hover:text-black"
+                >
                   Sneakers
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-gray-600 hover:text-black">
+                <Link
+                  to={"/coporateShoes"}
+                  className="text-gray-600 hover:text-black"
+                >
                   Coporate shoes
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-gray-600 hover:text-black">
+                <Link
+                  to={"/sandals"}
+                  className="text-gray-600 hover:text-black"
+                >
                   sandals
-                </a>
+                </Link>
               </li>
             </ul>
 
@@ -136,24 +130,54 @@ export const Shop: React.FC = () => {
                     L
                   </button>
                 </div>
+                <div className="mt-4">
+                  <h2 className="text-lg font-bold mb-4">Brand</h2>
+                  <label htmlFor="nike">Nike</label>
+                  <input type="radio" id="nike" className="items-center" />
+                </div>
               </div>
             </div>
           </aside>
 
           {/* Product Grid */}
           <section className="w-3/4 ml-8 grid grid-cols-2 lg:grid-cols-3 gap-8">
-            {productArray.map((product, index) => (
+            {/* {filteredShoes.map((productArray, index) => {
+            <div
+            key={index}
+            className="bg-white shadow-md rounded-lg overflow-hidden"
+          >
+            <div className="w-full h-48 bg-gray-200">
+                  <img src={productArray.productImage} alt="" />
+                </div>
+                <div className="p-4">
+                  <h3 className="text-lg font-bold mb-2">
+                    {productArray.nameOfProduct}
+                  </h3>
+                  <p className="text-gray-500 mb-4">
+                    ${productArray.ammountOfProduct}
+                  </p>
+                  <button className="w-full bg-logo-orange text-white font-bold py-2 rounded-lg hover:bg-orange-700">
+                    Add to Cart
+                  </button>
+                </div>
+          </div>
+          })} */}
+            {filteredShoes.map((productArray, index) => (
               <div
                 key={index}
                 className="bg-white shadow-md rounded-lg overflow-hidden"
               >
                 <div className="w-full h-48 bg-gray-200">
-                  <img src={product.productImage} alt="" />
+                  <img src={productArray.productImage} alt="" />
                 </div>
                 <div className="p-4">
-                  <h3 className="text-lg font-bold mb-2">{product.nameOfProduct}</h3>
-                  <p className="text-gray-500 mb-4">${product.ammountOfProduct}</p>
-                  <button className="w-full bg-logo-orange text-white font-bold py-2 rounded-lg hover:bg-orange-700">
+                  <h3 className="text-lg font-bold mb-2">
+                    {productArray.nameOfProduct}
+                  </h3>
+                  <p className="text-gray-500 mb-4">
+                    ${productArray.ammountOfProduct}
+                  </p>
+                  <button  className="w-full bg-logo-orange text-white font-bold py-2 rounded-lg hover:bg-orange-700">
                     Add to Cart
                   </button>
                 </div>
