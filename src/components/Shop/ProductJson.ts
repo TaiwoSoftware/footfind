@@ -9,7 +9,7 @@ import sandalsOne from "./ProductImages/sandals/2badj3m7.png";
 import sandalsTwo from "./ProductImages/sandals/3zalyi8v.png";
 import sandalsThree from "./ProductImages/sandals/gyc93c6a.png";
 import timberland from "./ProductImages/pkdf9piy.png";
-import nikePalm from './Productimages/nikeSlide.png';
+import nikePalm from './Productimages/nike-slide.png';
 import bluePalm from './ProductImages/bluePalm.png';
 import purplePalm from './ProductImages/purplePalm.png'
 import gucciOne from './ProductImages/gucciFive.png';
