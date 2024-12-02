@@ -13,6 +13,7 @@
     "@emotion/react": "^11.13.5",
     "@emotion/styled": "^11.13.5",
     "@supabase/supabase-js": "^2.46.1",
+    "firebase": "^11.0.2",
     "framer-motion": "^11.11.17",
     "gsap": "^3.12.5",
     "motion": "^11.11.17",
