@@ -9,7 +9,6 @@ import sandalsOne from "./ProductImages/sandals/2badj3m7.png";
 import sandalsTwo from "./ProductImages/sandals/3zalyi8v.png";
 import sandalsThree from "./ProductImages/sandals/gyc93c6a.png";
 import timberland from "./ProductImages/pkdf9piy.png";
-import gucciSandals from './Productimages/gucciEight.png';
 import bluePalm from './ProductImages/bluePalm.png';
 import purplePalm from './ProductImages/purplePalm.png'
 import gucciOne from './ProductImages/gucciFive.png';
@@ -131,11 +130,6 @@ export const ProductJson: ProductProps[] = [
     productImage: gucciTwelve,
     nameOfProduct: "Gucci black palm",
     ammountOfProduct: 1500,
-  },
-  {
-    productImage: gucciSandals,
-    nameOfProduct: "Gucci sandal",
-    ammountOfProduct: 4500,
   },
   {
     productImage: bluePalm,
