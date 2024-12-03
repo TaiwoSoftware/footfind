@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { BiSearch } from "react-icons/bi";
 import { useState } from "react";
 import { ProductJson } from "./ProductJson";
@@ -19,7 +19,6 @@ export const Shop: React.FC = () => {
     setFilteredShoes(filteredShoes);
   };
 
-  const handleSearchLogic = () => {};
   return (
     <div>
       <div className="bg-gray-100 min-h-screen font-customNunito">
@@ -63,7 +62,6 @@ export const Shop: React.FC = () => {
                 onChange={handleSearch}
               />
               <button
-                onClick={handleSearchLogic}
                 className="bg-logo-orange rounded-r-lg p-[5px]"
               >
                 <BiSearch className="text-2xl text-white " />
@@ -173,8 +171,8 @@ export const Shop: React.FC = () => {
           {/* Product Grid */}
           <section className="w-3/4 ml-8 grid grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredShoes.map((productArray, index) => (
+              <Link key={index} to={`/shop/${index}`}>
               <div
-                key={index}
                 className="bg-white shadow-md rounded-lg overflow-hidden"
               >
                 <div className="w-full h-48 bg-gray-200">
@@ -192,6 +190,7 @@ export const Shop: React.FC = () => {
                   </button>
                 </div>
               </div>
+              </Link>
             ))}
           </section>
         </main>
