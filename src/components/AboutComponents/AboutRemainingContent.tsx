@@ -3,9 +3,9 @@ export const AboutRemainingContent: React.FC = () => {
   return (
     <div className="mt-10 p-8">
       <h1 className="text-4xl text-center font-extrabold ">Who we are</h1>
-      <div className="grid grid-cols-2 gap-10 items-center mt-12">
+      <div className="grid responsive__about__remaining__content grid-cols-2 gap-10 items-center mt-12">
         <div>
-          <p className="text-justify">
+          <p className="text-justify responsive__about__paragraph">
             At Foot finds, we believe that the right pair of shoes can make all
             the difference. Established with a vision to redefine how footwear
             complements your lifestyle, we offer a curated selection of shoes

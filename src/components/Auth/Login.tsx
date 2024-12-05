@@ -1,48 +1,45 @@
-import React from "react";
-import { Link } from "react-router-dom";
-// import {getAuth, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword} from 'firebase/auth'
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
 export const Login: React.FC = () => {
-    // const auth = getAuth();
-    
-    // const [authing, setAuthing] = useState<boolean>(false)
-    // const [email, setEmail] = useState<string>('')
-    // const [password, setPassword] = useState<string>('')
-    // const [error, setError] = useState<string>('')
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
-    // const signInWithGoogle = async() => {
-    //     setAuthing(true)
+  const handleLogin = () => {
+    // Retrieve stored user data from localStorage
+    const storedData = localStorage.getItem("formData");
 
-    //     signInWithPopup(auth, new GoogleAuthProvider())
-    //     .then(response =>{
-    //         console.log(response.user.uid)
-    //         navigate('/shop')
-    //     })
-    //     .catch(error => {
-    //         console.log(error)
-    //         setAuthing(false)
-    //     })
-    // }
+    if (!storedData) {
+      setError("No account found. Please sign up.");
+      return;
+    }
 
-    // const signInWithEmail = async() => {
-    //     setAuthing(true);
-    //     setError('');
+    // Parse stored data
+    const userData = JSON.parse(storedData);
 
-    //     signInWithEmailAndPassword(auth,email,password)
-    //     .then(response => {
-    //         console.log(response.user.uid);
-    //         navigate('/shop')
-    //     })
-    //     .catch(error => {
-    //         console.log(error)
-    //         setError(error.message)
-    //         setAuthing(false)
-    //     })
-    // }
+    // Check if email and password match
+    if (userData.email === email && userData.password === password) {
+      setError(null);
+      alert("Login successful!");
+      navigate("/shop");
+    } else {
+      setError("Invalid email or password.");
+    }
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="w-full max-w-md bg-white rounded-lg shadow-md p-6">
         <h2 className="text-2xl font-bold text-center mb-4">Login</h2>
-        <form className="space-y-4">
+        <form
+          className="space-y-4"
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleLogin();
+          }}
+        >
           <div>
             <label
               htmlFor="email"
@@ -53,8 +50,11 @@ export const Login: React.FC = () => {
             <input
               id="email"
               type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              required
             />
           </div>
           <div>
@@ -67,13 +67,19 @@ export const Login: React.FC = () => {
             <input
               id="password"
               type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter your password"
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              required
             />
           </div>
+          {error && (
+            <p className="text-sm text-red-500 text-center">{error}</p>
+          )}
           <button
             type="submit"
-            className="w-full bg-logo-orange text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full bg-logo-orange text-white py-2 px-4 rounded-md hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
           >
             Login
           </button>

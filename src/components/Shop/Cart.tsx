@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import emailjs from "emailjs-com";
 import { ProductProps } from "./ProductInterface";
 import { PurchaseForm } from "./PurchaseForm";
 
@@ -9,15 +10,56 @@ interface CartProps {
   handlePurchase: (idx: number) => void;
 }
 
-export const Cart: React.FC<CartProps> = ({ cart, purchasedItems, handlePurchase }) => {
+export const Cart: React.FC<CartProps> = ({
+  cart,
+  purchasedItems,
+  handlePurchase,
+}) => {
   const [activeItem, setActiveItem] = useState<number | null>(null);
 
-  const handlePurchaseClick = (idx: number) => {
-    setActiveItem(idx);
+  const getUserEmail = (): string | null => {
+    try {
+      const formData = localStorage.getItem("formData");
+      if (!formData) return null;
+      const parsedFormData = JSON.parse(formData);
+      return parsedFormData.email || null;
+    } catch {
+      return null;
+    }
   };
 
-  const closeForm = () => {
-    setActiveItem(null);
+  const sendOrderEmail = (productName: string, productImage: string) => {
+    const userEmail = getUserEmail();
+    if (!userEmail) {
+      console.error("User email not found!");
+      return;
+    }
+
+    const templateParams = {
+      user_email: userEmail,
+      product_name: productName,
+      product_image: productImage,
+    };
+
+    emailjs
+      .send(
+        "service_ertwawf", // Replace with your EmailJS service ID
+        "template_hrhz9nq", // Replace with your EmailJS template ID
+        templateParams,
+        "KZ5IuiyfkxTw53AN8" // Replace with your EmailJS user ID
+      )
+      .then(
+        (response) => {
+          console.log(
+            "Email sent successfully!",
+            response.status,
+            response.text
+          );
+        },
+        (err) => {
+          console.error("Failed to send email.", err);
+        }
+      );
   };
 
   return (
@@ -46,27 +88,24 @@ export const Cart: React.FC<CartProps> = ({ cart, purchasedItems, handlePurchase
             </p>
 
             {purchasedItems.includes(idx) ? (
-              <div className="flex items-center space-x-2 mt-4 text-green-500">
-                <span className="text-xl font-bold">✔</span>
+              <div className="text-green-500">
                 <p className="text-lg">Purchased!</p>
               </div>
             ) : (
               <>
                 <button
-                  onClick={() => handlePurchaseClick(idx)}
+                  onClick={() => setActiveItem(idx)}
                   className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 mt-4"
                 >
                   Purchase
                 </button>
                 {activeItem === idx && (
-                  <div className="mt-4">
-                    <PurchaseForm
-                      onSubmit={() => {
-                        handlePurchase(idx);
-                        closeForm();
-                      }}
-                    />
-                  </div>
+                  <PurchaseForm
+                    onSubmit={() => {
+                      handlePurchase(idx);
+                      sendOrderEmail(item.nameOfProduct, item.productImage);
+                    }}
+                  />
                 )}
               </>
             )}

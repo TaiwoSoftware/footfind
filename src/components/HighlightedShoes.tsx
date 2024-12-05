@@ -10,7 +10,7 @@ export const HighlightedShoes: React.FC = () => {
         initial={{ y: 50, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
         transition={{ duration: 1.8, ease: "easeOut" }}
-        className="grid grid-cols-3 w-1/3 gap-4 mt-28 mx-auto"
+        className="grid grid-cols-3 hightlighted__shoe w-1/3 gap-4 mt-28 mx-auto"
       >
         <SingleHighlightShoe sneakersOne={FirstSneakers} />
         <SingleHighlightShoe sneakersOne={FirstCoporate} />

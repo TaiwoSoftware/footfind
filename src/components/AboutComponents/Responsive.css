@@ -1,0 +1,29 @@
+@media (max-width:1175px) {
+    .responsive__about__h1 {
+        font-size: 5rem;
+    }
+    .responsive__about__container {
+        margin-left:-15rem ;
+    }
+    .responsive__about__header__content {
+        font-size: 1.7rem;
+        text-align: center;
+    }
+
+    .responsive__about__remaining__content {
+        grid-template-columns: 100%;
+    }
+
+    .responsive__about__paragraph {
+        font-size:1.7rem
+    }
+
+
+    .responsive__footer {
+        margin-top: 2.5rem;
+    }
+
+    .responsive__footer__container p {
+        font-size: 2rem;
+    }
+}

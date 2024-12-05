@@ -11,7 +11,7 @@ const AuthButtons: React.FC = () => {
             duration: 0.125,
             ease: "easeInOut",
           }}
-          className="bg-[#a2510a] px-[1.5rem] py-[0.6rem] shadow-inner font-extrabold shadow-white text-white rounded-lg "
+          className="bg-[#a2510a] responsive__auth__button px-[1.5rem] py-[0.6rem] shadow-inner font-extrabold shadow-white text-white rounded-lg "
         >
           Create Account
         </motion.button>

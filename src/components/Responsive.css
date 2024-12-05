@@ -1,0 +1,65 @@
+@media (max-width: 1175px) {
+    .header__content__container {
+        grid-template-columns: 100%;
+    }
+    .illustration {
+        display: none;
+    }
+    .welcome {
+        display: none;
+    }
+    .foot__h1 {
+        text-align: center;
+        margin-top: 4rem;
+    }
+    .hightlighted__shoe{
+        margin-top: -2rem;
+    }
+    .responsive__link {
+        font-size: 1.6rem;
+    }
+
+    .responsive__logo {
+        font-size: 3rem;
+    }
+
+    .responsive__auth__button {
+        font-size: 1.5rem;
+    }
+
+    .responsive__body__content {
+        grid-template-columns: 100%;
+        margin-top: 2rem;
+    }
+
+    .responsive__image {
+        margin: 0 auto;
+        border-radius: 4rem;
+    }
+
+    .responsive__paragraph {
+        text-align: center;
+        font-size: 1.7rem;
+    }
+
+    .responsive__carousel__h1 {
+        font-size: 2.5rem;
+    }
+
+    .responsive__inner__span {
+        font-size: 3rem;
+    }
+
+    .responsive__brief__text {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width:994px) {
+    .homeNav {
+        display: none;
+    }
+    .responsive__nav {
+        display: block;
+    }
+}

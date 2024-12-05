@@ -4,25 +4,25 @@ const NavLinks: React.FC = () => {
     <div className="font-customNunito text-[#CCCCCC]">
       <Link
         to="/"
-        className="mr-4 text-[1.2rem] hover:underline hover:text-logo-orange"
+        className="mr-4 text-[1.2rem] responsive__link hover:underline hover:text-logo-orange"
       >
         Home
       </Link>
       <Link
         to="/about"
-        className="mr-4 text-[1.2rem] hover:underline hover:text-logo-orange"
+        className="mr-4 text-[1.2rem] responsive__link hover:underline hover:text-logo-orange"
       >
         About Us
       </Link>
       <Link
         to="/shop"
-        className="mr-4 text-[1.2rem] hover:underline hover:text-logo-orange"
+        className="mr-4 text-[1.2rem] responsive__link hover:underline hover:text-logo-orange"
       >
         Shop
       </Link>
       <Link
         to="/contact"
-        className="mr-4 text-[1.2rem] hover:underline hover:text-logo-orange"
+        className="mr-4 text-[1.2rem] responsive__link hover:underline hover:text-logo-orange"
       >
         Contact Us
       </Link>

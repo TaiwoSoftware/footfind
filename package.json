@@ -12,10 +12,10 @@
   "dependencies": {
     "@emotion/react": "^11.13.5",
     "@emotion/styled": "^11.13.5",
-    "@supabase/supabase-js": "^2.46.1",
-    "firebase": "^11.0.2",
+    "emailjs-com": "^3.2.0",
     "framer-motion": "^11.11.17",
     "gsap": "^3.12.5",
+    "js-cookie": "^3.0.5",
     "motion": "^11.11.17",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",
+    "@types/js-cookie": "^3.0.6",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@types/react-slick": "^0.23.13",

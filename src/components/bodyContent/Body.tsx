@@ -4,7 +4,7 @@ import blackShoe from "../images/xu0ruqmx.png";
 export const Body: React.FC = () => {
   return (
     <div>
-      <div className="grid grid-cols-2 gap-10 items-center p-10 mt-20">
+      <div className="grid grid-cols-2 gap-10 items-center responsive__body__content p-10 mt-20">
         <motion.div
           initial={{ opacity: 0, filter: "blur(10px)" }}
           whileInView={{ opacity: 1, filter: "blur(0px)" }}
@@ -14,7 +14,7 @@ export const Body: React.FC = () => {
           <h1 className="text-center font-extrabold text-4xl uppercase">
             Your trusted patner in Footwear
           </h1>
-          <p className="mt-2 font-customNunito text-justify">
+          <p className="mt-2 responsive__paragraph font-customNunito text-justify">
             At Foot-Find, we pride ourselves on being more than just a footwear
             provider — we’re your reliable partner for style, comfort, and
             quality. Over the years, we have continuously delivered exceptional
@@ -27,7 +27,7 @@ export const Body: React.FC = () => {
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 2, ease: "easeOut" }}
         >
-          <img src={blackShoe} alt="black shoe" />
+          <img src={blackShoe} alt="black shoe" className="responsive__image" />
         </motion.div>
       </div>
     </div>

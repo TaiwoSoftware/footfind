@@ -1,4 +1,4 @@
-// import { motion } from "framer-motion";
+// import { MobileNav } from "../mobileComponents/MobileNav";
 import { AboutRemainingContent } from "./AboutRemainingContent";
 import aboutImage from "./image/black.jpg";
 export const AboutContent: React.FC = () => {
@@ -9,12 +9,14 @@ export const AboutContent: React.FC = () => {
           <img src={aboutImage} alt="shoes" className="w-full opacity-35" />
         </div>
       </div>
-      <div className="absolute top-40 place-content-center">
+      
+      <div className="absolute top-40 responsive__about__container place-content-center">
+        {/* <MobileNav /> */}
         <div className="ml-[16rem]">
-          <h1 className="text-center text-logo-orange  font-extrabold mb-4 text-6xl uppercase">
+          <h1 className="text-center responsive__about__h1 text-logo-orange  font-extrabold mb-4 text-6xl uppercase">
             About us
           </h1>
-          <p className=" text-center font-customNunito mb-10 text-[#CCCCCC] mt-10">
+          <p className=" text-center responsive__about__header__content font-customNunito mb-10 text-[#CCCCCC] mt-10">
             Welcome to Foot finds, your ultimate destination for all things
             footwear. <br /> We are passionate about providing high-quality,
             stylish, and comfortable shoes for every occasion,

@@ -28,15 +28,15 @@ export const CarouselContainer: React.FC = () => {
     >
       <div className="p-8">
         <div>
-          <h1 className="text-center text-black ">
+          <h1 className="text-center responsive__carousel__h1 text-black ">
             Explore Our
             <br />
-            <span className="text-4xl uppercase font-extrabold text-logo-orange">
+            <span className="text-4xl responsive__inner__span uppercase font-extrabold text-logo-orange">
               Collections
             </span>
           </h1>
         </div>
-        <p className="text-center text-1xl italic mb-10">
+        <p className="text-center responsive__brief__text text-1xl italic mb-10">
           Discover a wide range of products tailored to meet your needs. From
           <br /> top-rated gadgets to trendy fashion, we've got something for
           everyone. <br />

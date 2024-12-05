@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 const HeaderContent: React.FC = () => {
   return (
     <div>
-      <div className="grid grid-cols-2 items-center mt-[8rem] py-4 px-10">
+      <div className="grid header__content__container grid-cols-2 items-center mt-[8rem] py-4 px-10">
         <motion.div
           initial={{
             y: 0,
@@ -22,10 +22,10 @@ const HeaderContent: React.FC = () => {
             ease: "easeInOut",
           }}
         >
-          <p className="text-left text-4xl text-logo-orange font-extrabold font-customNunito">
+          <p className="text-left welcome text-4xl text-logo-orange font-extrabold font-customNunito">
             Welcome to
           </p>
-          <h1 className="text-8xl font-extrabold font-customNunito text-white stroke-current drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
+          <h1 className="text-8xl foot__h1 font-extrabold font-customNunito text-white stroke-current drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
             FOOT FIND
           </h1>
           
@@ -48,7 +48,7 @@ const HeaderContent: React.FC = () => {
             ease: "easeInOut",
           }}
         >
-          <img src={sleek} alt="sleek-shoe" className="rounded-lg" />
+          <img src={sleek} alt="sleek-shoe" className="rounded-lg illustration" />
         </motion.div>
       </div>
       <HighlightedShoes />

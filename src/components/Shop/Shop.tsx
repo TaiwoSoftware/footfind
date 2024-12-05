@@ -1,9 +1,13 @@
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { BiSearch } from "react-icons/bi";
 import { useState } from "react";
 import { ProductJson } from "./ProductJson";
 import { CgProfile } from "react-icons/cg";
+import "./shop.css";
 export const Shop: React.FC = () => {
+  const storedData = localStorage.getItem("formData");
+  const fullName = storedData ? JSON.parse(storedData).fullName : "Guest";
+  const shortName = fullName.slice(0, 7);
   let productArray = ProductJson;
   // Search Feature
   const [searchItem, setSearchItem] = useState<string>("");
@@ -61,13 +65,11 @@ export const Shop: React.FC = () => {
                 placeholder="Type to search..."
                 onChange={handleSearch}
               />
-              <button
-                className="bg-logo-orange rounded-r-lg p-[5px]"
-              >
+              <button className="bg-logo-orange rounded-r-lg p-[5px]">
                 <BiSearch className="text-2xl text-white " />
               </button>
               <Link to={"/login"}>
-                <CgProfile className="ml-8 text-4xl cursor-pointer" />
+                <p className="ml- text-2xl cursor-pointer">{shortName}</p>
               </Link>
             </div>
           </div>
@@ -140,27 +142,57 @@ export const Shop: React.FC = () => {
                   <div className="block">
                     <div className="flex items-center justify-between">
                       <label htmlFor="nike">Nike</label>
-                      <input name="foot" type="radio" id="nike" className="items-center" />
+                      <input
+                        name="foot"
+                        type="radio"
+                        id="nike"
+                        className="items-center"
+                      />
                     </div>
                     <div className="flex items-center justify-between">
                       <label htmlFor="gucci">Gucci</label>
-                      <input name="foot" type="radio" id="gucci" className="items-center" />
+                      <input
+                        name="foot"
+                        type="radio"
+                        id="gucci"
+                        className="items-center"
+                      />
                     </div>
                     <div className="flex items-center justify-between">
                       <label htmlFor="addidas">Addidas</label>
-                      <input name="foot" type="radio" id="addidas" className="items-center" />
+                      <input
+                        name="foot"
+                        type="radio"
+                        id="addidas"
+                        className="items-center"
+                      />
                     </div>
                     <div className="flex items-center justify-between">
                       <label htmlFor="puma">Puma</label>
-                      <input name="foot" type="radio" id="puma" className="items-center" />
+                      <input
+                        name="foot"
+                        type="radio"
+                        id="puma"
+                        className="items-center"
+                      />
                     </div>
                     <div className="flex items-center justify-between">
                       <label htmlFor="reebok">Reebok</label>
-                      <input name="foot" type="radio" id="reebok" className="items-center" />
+                      <input
+                        name="foot"
+                        type="radio"
+                        id="reebok"
+                        className="items-center"
+                      />
                     </div>
                     <div className="flex items-center justify-between">
                       <label htmlFor="newBalance">New Balance</label>
-                      <input name="foot" type="radio" id="newBalance" className="items-center" />
+                      <input
+                        name="foot"
+                        type="radio"
+                        id="newBalance"
+                        className="items-center"
+                      />
                     </div>
                   </div>
                 </div>
@@ -172,24 +204,22 @@ export const Shop: React.FC = () => {
           <section className="w-3/4 ml-8 grid grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredShoes.map((productArray, index) => (
               <Link key={index} to={`/shop/${index}`}>
-              <div
-                className="bg-white shadow-md rounded-lg overflow-hidden"
-              >
-                <div className="w-full h-48 bg-gray-200">
-                  <img src={productArray.productImage} alt="" />
+                <div className="bg-white shadow-md rounded-lg overflow-hidden">
+                  <div className="w-full h-48 bg-gray-200">
+                    <img src={productArray.productImage} alt="" />
+                  </div>
+                  <div className="p-4">
+                    <h3 className="text-lg text-logo-orange font-bold mb-2">
+                      {productArray.nameOfProduct}
+                    </h3>
+                    <p className="text-gray-500 mb-4">
+                      ${productArray.ammountOfProduct}
+                    </p>
+                    <button className="w-full bg-logo-orange text-white font-bold py-2 rounded-lg hover:bg-orange-700">
+                      Add to Cart
+                    </button>
+                  </div>
                 </div>
-                <div className="p-4">
-                  <h3 className="text-lg text-logo-orange font-bold mb-2">
-                    {productArray.nameOfProduct}
-                  </h3>
-                  <p className="text-gray-500 mb-4">
-                    ${productArray.ammountOfProduct}
-                  </p>
-                  <button className="w-full bg-logo-orange text-white font-bold py-2 rounded-lg hover:bg-orange-700">
-                    Add to Cart
-                  </button>
-                </div>
-              </div>
               </Link>
             ))}
           </section>

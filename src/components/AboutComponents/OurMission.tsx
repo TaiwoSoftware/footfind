@@ -3,7 +3,7 @@ export const OurMission:React.FC = () => {
   return (
     <div className="mt-10 p-4">
       <h1 className="text-4xl text-center font-extrabold ">Our Mission</h1>
-      <div className="grid grid-cols-2 gap-10 items-center mt-12">
+      <div className="grid grid-cols-2 responsive__about__remaining__content gap-10 items-center mt-12">
         <div className="w-full">
           <img
             src={missionStatement}
@@ -12,7 +12,7 @@ export const OurMission:React.FC = () => {
           />
         </div>
         <div>
-          <p className="text-justify">
+          <p className="text-justify responsive__about__paragraph">
             Our mission is simple: to help you put your best foot forward. We
             are committed to delivering exceptional value through premium
             quality products, excellent customer service, and a seamless
