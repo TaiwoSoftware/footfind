@@ -8,7 +8,6 @@ export const Shop: React.FC = () => {
   const fullName = storedData ? JSON.parse(storedData).fullName : "Guest";
   const shortName = fullName.slice(0, 7);
   let productArray = ProductJson;
-  // Search Feature
   const [searchItem, setSearchItem] = useState<string>("");
   const [filteredShoes, setFilteredShoes] = useState(productArray);
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
