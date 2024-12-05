@@ -8,14 +8,14 @@ module.exports = {
     },
     extend: {
       colors: {
-        'logo-orange' : '#F48221'
+        'logo-orange': '#F48221'
       },
-      fontFamily:{
-        customMonserrat:['monserrat', 'sans-serif'],
-        customNunito:['nunito', 'sans-serif'],
-        customDancing:['dancing', 'cursive']
+      fontFamily: {
+        customMonserrat: ['monserrat', 'sans-serif'],
+        customNunito: ['nunito', 'sans-serif'],
+        customDancing: ['dancing', 'cursive']
       }
     },
   },
   plugins: [],
-}
+};
