@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { BiSearch } from "react-icons/bi";
 import { useState } from "react";
 import { ProductJson } from "./ProductJson";
-import { CgProfile } from "react-icons/cg";
 import "./shop.css";
 export const Shop: React.FC = () => {
   const storedData = localStorage.getItem("formData");
