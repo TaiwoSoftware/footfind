@@ -12,6 +12,9 @@ import { useState } from "react";
 import { ProductProps } from "./components/Shop/ProductInterface";
 import { Cart } from "./components/Shop/Cart";
 import Profile from "./components/Auth/Profile";
+import NotificationPage from "./components/Auth/NotificationPage";
+import PostProduct from "./components/Shop/PostProduct";
+import AdminPage from "./components/admin/AdminPage";
 
 function App() {
   const [cart, setCart] = useState<ProductProps[]>([]);
@@ -52,6 +55,9 @@ function App() {
           element={<ProductDetails addToCart={addToCart} />}
         />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/notification" element={<NotificationPage />} />
+        <Route path="/newIn" element={<PostProduct />} />
+        <Route path="/admin" element={<AdminPage />} />
       </Routes>
     </div>
   );
