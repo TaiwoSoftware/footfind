@@ -62,6 +62,21 @@ export const Cart: React.FC<CartProps> = ({
       );
   };
 
+  const saveToLocalStorage = (productName: string, productImage: string, ammountOfProduct: number) => {
+    // Retrieve existing purchased items from localStorage
+    const existingPurchases = JSON.parse(localStorage.getItem("purchasedItems") || "[]");
+
+    // Add the new item to the purchases array
+    const updatedPurchases = [
+      ...existingPurchases,
+      { productName, productImage,ammountOfProduct },
+    ];
+
+    // Save the updated purchases array to localStorage
+    localStorage.setItem("purchasedItems", JSON.stringify(updatedPurchases));
+    console.log("Item saved to localStorage:", { productName, productImage, ammountOfProduct });
+  };
+
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold text-center mb-6">Cart Items</h1>
@@ -104,6 +119,7 @@ export const Cart: React.FC<CartProps> = ({
                     onSubmit={() => {
                       handlePurchase(idx);
                       sendOrderEmail(item.nameOfProduct, item.productImage);
+                      saveToLocalStorage(item.nameOfProduct, item.productImage, item.ammountOfProduct);
                     }}
                   />
                 )}

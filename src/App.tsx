@@ -11,6 +11,7 @@ import { ProductDetails } from "./components/Shop/ProductDetails";
 import { useState } from "react";
 import { ProductProps } from "./components/Shop/ProductInterface";
 import { Cart } from "./components/Shop/Cart";
+import Profile from "./components/Auth/Profile";
 
 function App() {
   const [cart, setCart] = useState<ProductProps[]>([]);
@@ -50,6 +51,7 @@ function App() {
           path="/shop/:index"
           element={<ProductDetails addToCart={addToCart} />}
         />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </div>
   );

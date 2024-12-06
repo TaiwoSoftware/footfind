@@ -66,7 +66,7 @@ export const Shop: React.FC = () => {
               <button className="bg-logo-orange rounded-r-lg p-[5px]">
                 <BiSearch className="text-2xl text-white " />
               </button>
-              <Link to={"/login"}>
+              <Link to={"/profile"}>
                 <p className="ml- text-2xl cursor-pointer">{shortName}</p>
               </Link>
             </div>
