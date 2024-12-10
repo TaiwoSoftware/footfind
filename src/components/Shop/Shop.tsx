@@ -2,9 +2,11 @@ import { Link } from "react-router-dom";
 import { BiSearch } from "react-icons/bi";
 import { useState } from "react";
 import { ProductJson } from "./ProductJson";
+import { ProductProps } from "./ProductInterface";
 import "./shop.css";
 export const Shop: React.FC = () => {
   const storedData = localStorage.getItem("formData");
+  const storedProduct = JSON.parse(localStorage.getItem("products") || "[]");
   const fullName = storedData ? JSON.parse(storedData).fullName : "Guest";
   const shortName = fullName.slice(0, 7);
   let productArray = ProductJson;
@@ -222,6 +224,28 @@ export const Shop: React.FC = () => {
             ))}
           </section>
         </main>
+        <section className="w-3/4 ml-8 grid grid-cols-2 lg:grid-cols-3 gap-8">
+          {storedProduct.map((productArray: ProductProps, index: number) => (
+            <Link key={index} to={`/shop/${index}`}>
+              <div className="bg-white shadow-md rounded-lg overflow-hidden">
+                <div className="w-full h-48 bg-gray-200">
+                  <img src={productArray.productImage} alt="" />
+                </div>
+                <div className="p-4">
+                  <h3 className="text-lg text-logo-orange font-bold mb-2">
+                    {productArray.nameOfProduct}
+                  </h3>
+                  <p className="text-gray-500 mb-4">
+                    ${productArray.ammountOfProduct}
+                  </p>
+                  <button className="w-full bg-logo-orange text-white font-bold py-2 rounded-lg hover:bg-orange-700">
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </section>
       </div>
     </div>
   );

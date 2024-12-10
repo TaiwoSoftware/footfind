@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const AdminPage: React.FC = () => {
   const [user, setUser] = useState<any>(null);
@@ -11,13 +12,11 @@ const AdminPage: React.FC = () => {
     setOrders(fetchOrdersData("purchasedItems"));
   }, []);
 
-  // Fetch user data (stored as an object)
   const fetchUserData = (key: string) => {
     const data = localStorage.getItem(key);
     return data ? JSON.parse(data) : null;
   };
 
-  // Fetch orders data (stored as an array)
   const fetchOrdersData = (key: string) => {
     const data = localStorage.getItem(key);
     return data ? JSON.parse(data) : [];
@@ -26,6 +25,11 @@ const AdminPage: React.FC = () => {
   return (
     <div className="container mx-auto p-6">
       <h2 className="text-3xl font-bold text-center mb-6">Admin Dashboard</h2>
+      <Link to={'/newIn'}>
+        <button className="bg-green-800 text-white py-2 px-4 rounded-lg m-4 shadow-md shadow-gray-700">
+          Post A new shoe
+        </button>
+      </Link>
 
       {/* Grid layout */}
       <div className="grid lg:grid-cols-2 gap-6">

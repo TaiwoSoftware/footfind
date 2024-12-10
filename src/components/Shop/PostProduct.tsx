@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import { MdDelete } from "react-icons/md";
 const PostProduct: React.FC = () => {
   const [productName, setProductName] = useState<string>("");
   const [productImage, setProductImage] = useState<File | null>(null);
@@ -22,6 +22,13 @@ const PostProduct: React.FC = () => {
       setProductImage(file);
       setImagePreview(URL.createObjectURL(file)); // Preview the image
     }
+  };
+
+  //Handle delete Post
+  const handleDeleteProduct = () => {
+    localStorage.removeItem("products");
+    alert("Deleted");
+    window.location.reload();
   };
 
   // Handle form submission
@@ -112,24 +119,32 @@ const PostProduct: React.FC = () => {
       </form>
 
       <h2 className="text-xl font-bold mt-8">Existing Products</h2>
-      <ul className="mt-4 space-y-4">
+      <div className="mt-4 space-y-4">
         {products.map((product, index) => (
-          <li
+          <div
             key={index}
-            className="p-4 border rounded shadow flex items-center space-x-4"
+            className="p-4 border rounded shadow flex items-center justify-between space-x-4"
           >
-            <img
-              src={product.productImage}
-              alt={product.nameOfProduct}
-              className="w-16 h-16 object-cover rounded"
-            />
             <div>
-              <h3 className="text-lg font-semibold">{product.nameOfProduct}</h3>
-              <p>${product.ammountOfProduct.toFixed(2)}</p>
+              <img
+                src={product.productImage}
+                alt={product.nameOfProduct}
+                className="w-16 h-16 object-cover rounded"
+              />
+              <div>
+                <h3 className="text-lg font-semibold">
+                  {product.nameOfProduct}
+                </h3>
+                <p>${product.ammountOfProduct.toFixed(2)}</p>
+              </div>
             </div>
-          </li>
+
+            <div>
+              <MdDelete onClick={handleDeleteProduct} className="text-2xl" />
+            </div>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
