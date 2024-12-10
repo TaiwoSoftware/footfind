@@ -222,30 +222,30 @@ export const Shop: React.FC = () => {
                 </div>
               </Link>
             ))}
+            {storedProduct.map((productArray: ProductProps, index: number) => (
+              <Link key={index} to={`/shop/${index}`}>
+                <div className="bg-white shadow-md rounded-lg overflow-hidden">
+                <span className="bg-red-600 text-white rounded-r-full p-4 w-full">New</span>
+                  <div className="w-full h-48 bg-gray-200">
+                    <img src={productArray.productImage} alt="" />
+                  </div>
+                  <div className="p-4">
+                    <h3 className="text-lg text-logo-orange font-bold mb-2">
+                      {productArray.nameOfProduct}
+                    </h3>
+                    <p className="text-gray-500 mb-4">
+                      ${productArray.ammountOfProduct}
+                    </p>
+                    <button className="w-full bg-logo-orange text-white font-bold py-2 rounded-lg hover:bg-orange-700">
+                      Add to Cart
+                    </button>
+                  </div>
+                </div>
+              </Link>
+            ))}
           </section>
         </main>
-        <section className="w-3/4 ml-8 grid grid-cols-2 lg:grid-cols-3 gap-8">
-          {storedProduct.map((productArray: ProductProps, index: number) => (
-            <Link key={index} to={`/shop/${index}`}>
-              <div className="bg-white shadow-md rounded-lg overflow-hidden">
-                <div className="w-full h-48 bg-gray-200">
-                  <img src={productArray.productImage} alt="" />
-                </div>
-                <div className="p-4">
-                  <h3 className="text-lg text-logo-orange font-bold mb-2">
-                    {productArray.nameOfProduct}
-                  </h3>
-                  <p className="text-gray-500 mb-4">
-                    ${productArray.ammountOfProduct}
-                  </p>
-                  <button className="w-full bg-logo-orange text-white font-bold py-2 rounded-lg hover:bg-orange-700">
-                    Add to Cart
-                  </button>
-                </div>
-              </div>
-            </Link>
-          ))}
-        </section>
+        <section className="w-3/4 ml-8 grid grid-cols-2 lg:grid-cols-3 gap-8"></section>
       </div>
     </div>
   );
