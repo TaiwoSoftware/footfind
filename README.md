@@ -1,5 +1,7 @@
 # Foot Find
 
+**Version 1.0**
+
 Foot Find is an e-commerce platform where users can search, filter, and browse various products. The platform supports user authentication, allows admins to post products, and offers smooth animations for an enhanced user experience.
 
 This project is built using modern web technologies such as React, GSAP, React Icons, Framer Motion, Supabase, and EmailJS.
@@ -9,17 +11,17 @@ This project is built using modern web technologies such as React, GSAP, React I
 ### User Features
 
 #### User Authentication:
-- Users can sign up, log in, and log out securely with **Supabase** for authentication.
+- Users can sign up, log in, and log out securely with Supabase for authentication.
 
 #### Search and Filter Products:
 - Users can search products by brand name and other criteria.
 - Filter products based on categories, brands, and attributes.
 
 #### Product Browsing:
-- Users can browse products in a dynamic and responsive interface, enhanced with smooth animations using **GSAP** and **Framer Motion**.
+- Users can browse products in a dynamic and responsive interface, enhanced with smooth animations using GSAP and Framer Motion.
 
 #### Email Notifications:
-- **EmailJS** is used to send notification emails to users after successful registration or other significant actions.
+- EmailJS is used to send notification emails to users after successful registration or other significant actions.
 
 ### Admin Features
 
@@ -43,22 +45,83 @@ This project is built using modern web technologies such as React, GSAP, React I
 Follow these steps to set up the project on your local machine.
 
 ### Prerequisites
-
 Ensure you have the following installed:
-- **Node.js** (version >= 14.x)
-- **npm** or **yarn** (package managers)
+- Node.js (version >= 14.x)
+- npm or yarn (package managers)
 
 ### Steps to Install
 
 1. Clone the repository:
 
-   ```bash
-   git clone https://github.com/your-username/foot-find.git
-2. ```bash
-   cd foot-find
-3. Install dependencies
-   ```bash
-   npm install
-4. Start the project 
+    ```bash
+    git clone https://github.com/your-username/foot-find.git
+    ```
+
+2. Navigate to the project directory:
+
+    ```bash
+    cd foot-find
+    ```
+
+3. Install dependencies:
+   - Using npm:
+
+     ```bash
+     npm install
+     ```
+
+   - Or using yarn:
+
+     ```bash
+     yarn install
+     ```
+
+4. Set up environment variables:
+   - Create a `.env` file in the root of your project.
+   - Add necessary environment variables for Supabase and EmailJS. Consult their documentation for API keys.
+
+5. Run the application locally:
+   - Using npm:
+
+     ```bash
+     npm start
+     ```
+
+   - Or with yarn:
+
+     ```bash
+     yarn start
+     ```
+
+   The application will now be accessible at [http://localhost:3000](http://localhost:3000).
+
+## Usage
+
+### User Signup/Authentication:
+- Users can sign up, log in, and manage their accounts.
+- Once logged in, they can browse and purchase products.
+
+### Admin Features:
+- Admin users can log in to a separate admin panel where they can manage products by adding new items, editing existing ones, and removing outdated products.
+
+### Search & Filters:
+- Users can search for products by brand or category and apply filters to refine their results.
+
+### Email Notifications:
+- Users receive confirmation emails after registration and other relevant actions.
+
+## File Structure
+
+Here’s a breakdown of the project’s directory structure:
+
 ```bash
-    npm start
+/src
+  /components           # Reusable UI components like Navbar, ProductCard, etc.
+  /pages                # Pages for user and admin views, like Home, Login, Admin Dashboard
+  /styles               # Custom CSS or SCSS files for styling
+  /utils                # Utility functions like API calls, form validation, etc.
+  /assets               # Images, icons, and other assets
+  /hooks                # Custom React hooks
+  .env                  # Environment variables (API keys for Supabase, EmailJS)
+  index.js              # Main entry point for the app
+  App.js                # App component to render different pages and manage routes
