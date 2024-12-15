@@ -17,7 +17,7 @@ export const Navbar: React.FC = () => {
           </div>
         </div>
 
-        <div className=" headerContent absolute top-0">
+        <div className=" absolute top-0">
           <NavContainer />
           <MobileNav />
           <HeaderContent />

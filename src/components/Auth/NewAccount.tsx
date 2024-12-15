@@ -3,6 +3,7 @@ import loginImage from "./AuthImage/mainlog.jpeg";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { MobileNav } from "../mobileComponents/MobileNav";
 
 export const NewAccount: React.FC = () => {
   const [value, setValue] = useState("");
@@ -62,8 +63,11 @@ export const NewAccount: React.FC = () => {
 
   return (
     <div>
-      <div className="bg-black">
-        <NavContainer />
+      <div>
+        <div className="bg-black">
+          <NavContainer />
+        </div>
+        <MobileNav />
       </div>
       <div className="bg-gray-100 py-16 font-customNunito">
         <motion.div
@@ -81,7 +85,7 @@ export const NewAccount: React.FC = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h1 className="text-3xl font-extrabold mb-8 text-center lg:text-left">
+            <h1 className="text-3xl mt-10 font-extrabold mb-8 text-center lg:text-left">
               Create a New Account
             </h1>
             <form className="space-y-6">
@@ -207,7 +211,7 @@ export const NewAccount: React.FC = () => {
 
           {/* Image Section */}
           <motion.div
-            className="w-full lg:w-1/2"
+            className="w-full lg:w-1/2 hidden lg:block"
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}

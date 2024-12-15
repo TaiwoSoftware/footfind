@@ -8,6 +8,7 @@
     .responsive__about__header__content {
         font-size: 1.7rem;
         text-align: center;
+        display: none;
     }
 
     .responsive__about__remaining__content {

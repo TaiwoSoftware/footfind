@@ -4,12 +4,16 @@ import { BiPhone } from "react-icons/bi";
 import { MdEmail } from "react-icons/md";
 import { BiLocationPlus } from "react-icons/bi";
 import { FooterContainer } from "../FooterComponent/FooterContainer";
+import { MobileNav } from "../mobileComponents/MobileNav";
 
 export const Contact: React.FC = () => {
   return (
     <div>
-      <div className="bg-black">
-        <NavContainer />
+      <div>
+        <div className="bg-black">
+          <NavContainer />
+        </div>
+        <MobileNav />
       </div>
 
       <div className="bg-gray-100 py-16 font-customNunito">

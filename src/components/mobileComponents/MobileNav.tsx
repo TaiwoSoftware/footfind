@@ -10,7 +10,7 @@ export const MobileNav: React.FC = () => {
   };
   return (
     <div className="relative hidden responsive__nav">
-      <div className="flex justify-between bg-[#252525] fixed w-full items-center p-4">
+      <div className="flex justify-between bg-[#252525] z-50 fixed w-full items-center p-4">
         <Logo />
         <div>
           <Hamburger handleClick={handleClick} />
