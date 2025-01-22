@@ -17,7 +17,7 @@ export const Contact: React.FC = () => {
       </div>
 
       <div className="bg-gray-100 py-16 font-customNunito">
-        <div className="max-w-6xl mx-auto px-8">
+        <div className="max-w-6xl mx-auto mt-20 px-8">
           {/* Contact Us Header */}
           <h1 className="text-center text-4xl font-extrabold mb-8">
             Contact Us
