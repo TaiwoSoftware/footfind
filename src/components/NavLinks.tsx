@@ -21,6 +21,12 @@ const NavLinks: React.FC = () => {
         Shop
       </Link>
       <Link
+        to="/admin"
+        className="mr-4 text-[1.5rem] responsive__link hover:underline hover:text-logo-orange"
+      >
+        admin
+      </Link>
+      <Link
         to="/contact"
         className="mr-4 text-[1.5rem] responsive__link hover:underline hover:text-logo-orange"
       >
