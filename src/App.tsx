@@ -15,6 +15,7 @@ import Profile from "./components/Auth/Profile";
 import NotificationPage from "./components/Auth/NotificationPage";
 import PostProduct from "./components/Shop/PostProduct";
 import AdminPage from "./components/admin/AdminPage";
+import MobileView from "./components/mobileComponents/MobileView";
 
 function App() {
   const [cart, setCart] = useState<ProductProps[]>([]);
@@ -40,6 +41,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/sneakers" element={<Sneakers />} />
         <Route path="/newUser" element={<NewAccount />} />
+        <Route path="/mobile" element={<MobileView />} />
         <Route
           path="/cart"
           element={

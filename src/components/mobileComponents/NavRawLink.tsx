@@ -8,7 +8,7 @@ const NavRawLink: React.FC<LinkProp> = ({ to, linkText }) => {
     <div className="mt-2">
       <Link
         to={to}
-        className=" hover:underline text-white text-4xl hover:text-logo-orange"
+        className=" hover:underline text-white text-2xl hover:text-logo-orange"
       >
         {linkText}
       </Link>

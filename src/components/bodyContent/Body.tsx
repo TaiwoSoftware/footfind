@@ -12,13 +12,14 @@ export const Body: React.FC = () => {
           className="font-customMonserrat"
         >
           <h1 className="text-center font-extrabold text-4xl uppercase">
-            Your trusted patner in Footwear
+            Your trusted partner in Footwears
           </h1>
           <p className="mt-2 responsive__paragraph font-customNunito text-justify">
-            At Foot-Find, we pride ourselves on being more than just a footwear
-            provider — we’re your reliable partner for style, comfort, and
-            quality. Over the years, we have continuously delivered exceptional
-            shoes that cater to every taste, occasion, and need.{" "}
+            At Foot-Find, we pride ourselves on being more than just a
+            footwear provider — we’re your reliable partner for style,
+            comfort, and quality. Over the years, we have continuously
+            delivered exceptional shoes that cater to every taste, occasion,
+            and need.
           </p>
         </motion.div>
 
@@ -27,7 +28,11 @@ export const Body: React.FC = () => {
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 2, ease: "easeOut" }}
         >
-          <img src={blackShoe} alt="black shoe" className="responsive__image" />
+          <img
+            src={blackShoe}
+            alt="black shoe"
+            className="responsive__image"
+          />
         </motion.div>
       </div>
     </div>
