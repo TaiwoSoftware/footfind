@@ -16,6 +16,7 @@ import NotificationPage from "./components/Auth/NotificationPage";
 import PostProduct from "./components/Shop/PostProduct";
 import AdminPage from "./components/admin/AdminPage";
 import MobileView from "./components/mobileComponents/MobileView";
+import AboutUs from "./components/AboutComponents/About";
 
 function App() {
   const [cart, setCart] = useState<ProductProps[]>([]);
@@ -35,7 +36,7 @@ function App() {
     <div>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/about" element={<AboutPage />} />
+        <Route path="/about" element={<AboutUs />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
