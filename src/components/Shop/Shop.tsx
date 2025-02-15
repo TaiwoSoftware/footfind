@@ -4,19 +4,23 @@ import { useState } from "react";
 import { ProductJson } from "./ProductJson";
 import { useMediaQuery } from "react-responsive";
 import "./shop.css";
+import Logo from "../Logo";
 
 export const Shop: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const isMobile = useMediaQuery({ maxWidth: 1024 });
   const onMobile = useMediaQuery({ maxWidth: 768 });
+
   const storedData = localStorage.getItem("formData");
-  const fullName = storedData ? JSON.parse(storedData).fullName : "Guest";
+  const fullName = storedData ? JSON.parse(storedData).fullName : "Sign in";
   const shortName = fullName.slice(0, 7);
   const isRegistered = storedData !== null;
+
   const [searchItem, setSearchItem] = useState<string>("");
   const [brandFilter, setBrandFilter] = useState<string>("");
   const [filteredShoes, setFilteredShoes] = useState(ProductJson);
 
+  // Function to filter products
   const filterProducts = (searchTerm: string, brand: string) => {
     let filtered = ProductJson;
 
@@ -35,12 +39,14 @@ export const Shop: React.FC = () => {
     setFilteredShoes(filtered);
   };
 
+  // Search handler
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const searchTerm = e.target.value;
     setSearchItem(searchTerm);
     filterProducts(searchTerm, brandFilter);
   };
 
+  // Brand filter handler
   const handleBrandFilter = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedBrand = e.target.value;
     setBrandFilter(selectedBrand);
@@ -49,11 +55,13 @@ export const Shop: React.FC = () => {
 
   return (
     <div className="bg-gray-100 min-h-screen font-customNunito">
+      {/* Header */}
       <header className="bg-white shadow-md py-4">
         <div className="container mx-auto flex items-center justify-between px-4">
           {/* Logo */}
           <Link to="/">
-            <h1 className="text-xl font-bold">Foot-finds</h1>
+          <Logo />
+            {/* <h1 className="text-xl font-bold">Foot-finds</h1> */}
           </Link>
 
           {/* Desktop Navigation */}
@@ -81,7 +89,7 @@ export const Shop: React.FC = () => {
             </Link>
           </nav>
 
-          {/* Search & Profile */}
+          {/* Search & Profile (Desktop) */}
           <div className="hidden lg:flex items-center">
             <input
               type="search"
@@ -144,30 +152,29 @@ export const Shop: React.FC = () => {
                 <Link to="/cart" className="text-gray-600 hover:text-black">
                   Cart
                 </Link>
-
                 <h2 className="text-lg font-bold mb-4">Filter by Brand</h2>
-                <div className="block">
-                  {[
-                    "Nike",
-                    "Puma",
-                    "New Balance",
-                    "Gucci",
-                    "Addidas",
-                    "Reebok",
-                    "Timberland",
-                  ].map((brand) => (
-                    <label key={brand} className="block">
-                      <input
-                        type="radio"
-                        name="brandFilter"
-                        value={brand}
-                        checked={brandFilter === brand}
-                        onChange={handleBrandFilter}
-                      />{" "}
-                      {brand}
-                    </label>
-                  ))}
-                </div>
+            <div className="block">
+              {[
+                "Nike",
+                "Puma",
+                "New Balance",
+                "Gucci",
+                "Addidas",
+                "Reebok",
+                "Timberland",
+              ].map((brand) => (
+                <label key={brand} className="block">
+                  <input
+                    type="radio"
+                    name="brandFilter"
+                    value={brand}
+                    checked={brandFilter === brand}
+                    onChange={handleBrandFilter}
+                  />{" "}
+                  {brand}
+                </label>
+              ))}
+            </div>
               </nav>
 
               {/* Search & Profile (Only in mobile) */}
@@ -194,46 +201,49 @@ export const Shop: React.FC = () => {
         )}
       </header>
 
+      {/* Main Content */}
       <main className="px-4 py-8 flex flex-col lg:flex-row">
-      {!onMobile && (
-  <aside className="bg-white shadow-md rounded-lg p-4 lg:w-1/4 mb-4">
-    <h2 className="text-lg font-bold mb-4">Filter by Brand</h2>
-    <div className="block">
-      {[
-        "Nike",
-        "Puma",
-        "New Balance",
-        "Gucci",
-        "Addidas",
-        "Reebok",
-        "Timberland",
-      ].map((brand) => (
-        <label key={brand} className="block">
-          <input
-            type="radio"
-            name="brandFilter"
-            value={brand}
-            checked={brandFilter === brand}
-            onChange={handleBrandFilter}
-          />{" "}
-          {brand}
-        </label>
-      ))}
-    </div>
-  </aside>
-)}
+        {/* Sidebar (Hidden on mobile) */}
+        {!onMobile && (
+          <aside className="bg-white shadow-md rounded-lg p-4 lg:w-1/4 mb-4">
+            <h2 className="text-lg font-bold mb-4">Filter by Brand</h2>
+            <div className="block">
+              {[
+                "Nike",
+                "Puma",
+                "New Balance",
+                "Gucci",
+                "Addidas",
+                "Reebok",
+                "Timberland",
+              ].map((brand) => (
+                <label key={brand} className="block">
+                  <input
+                    type="radio"
+                    name="brandFilter"
+                    value={brand}
+                    checked={brandFilter === brand}
+                    onChange={handleBrandFilter}
+                  />{" "}
+                  {brand}
+                </label>
+              ))}
+            </div>
+          </aside>
+        )}
 
-        <section className="grid gap-8 grid-cols-1 lg:grid-cols-3 w-full">
+        {/* Product Grid */}
+        <section className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 w-full p-4 md:p-6">
           {filteredShoes.map((product, index) => (
             <div
               key={index}
-              className="bg-white shadow-md rounded-lg overflow-hidden p-3"
+              className="bg-white shadow-md rounded-lg overflow-hidden p-3 transition-transform transform hover:shadow-lg hover:-translate-y-1"
             >
-              <div className="w-full h-48 bg-gray-200 flex items-center justify-center">
+              <div className="w-full aspect-[4/3] bg-gray-200 flex items-center justify-center">
                 <img
                   src={product.productImage}
                   alt={product.nameOfProduct}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full max-h-60 object-contain"
                 />
               </div>
               <div className="p-2">
