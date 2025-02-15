@@ -52,6 +52,9 @@ const AdminPage: React.FC = () => {
               <p>
                 <strong>Phone:</strong> {user.phoneNumber}
               </p>
+              <p>
+                <strong>Address:</strong> {user.address}
+              </p>
             </div>
           ) : (
             <p>No user data found.</p>

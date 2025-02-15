@@ -42,7 +42,7 @@ const MobileView: React.FC = () => {
                 {slides[slideIndex]}
               </h1>
               {slideIndex === 2 && (
-                <Link to={'/newUser'}>
+                <Link to={'/shop'}>
                 <motion.button
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}

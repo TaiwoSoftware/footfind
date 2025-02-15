@@ -140,24 +140,36 @@ export const Shop: React.FC = () => {
 
       {/* Product Grid */}
       <section className={`grid gap-8 ${isMobile ? 'grid-cols-1' : 'grid-cols-2 lg:grid-cols-3 w-3/4 ml-8'}`}>
-        {filteredShoes.map((productArray, index) => (
-          <Link key={index} to={`/shop/${index}`}>
-            <div className="bg-white shadow-md rounded-lg overflow-hidden">
-              <div className="w-full h-48 bg-gray-200">
-                <img src={productArray.productImage} alt="" />
-              </div>
-              <div className="p-4">
-                <h3 className="text-lg text-logo-orange font-bold mb-2">
-                  {productArray.nameOfProduct}
-                </h3>
-                <p className="text-gray-500 mb-4">${productArray.ammountOfProduct}</p>
-                <button className="w-full bg-logo-orange text-white font-bold py-2 rounded-lg hover:bg-orange-700">
-                  Add to Cart
-                </button>
-              </div>
+      {filteredShoes.map((productArray, index) => (
+        <Link key={index} to={`/shop/${index}`} className="block">
+          <div className="bg-white shadow-md rounded-lg overflow-hidden p-3">
+            {/* Product Image */}
+            <div className="w-full h-48 bg-gray-200 flex items-center justify-center">
+              <img
+                src={productArray.productImage}
+                alt=""
+                className="w-full h-full object-cover"
+              />
             </div>
-          </Link>
-        ))}
+
+            {/* Product Info */}
+            <div className="p-2">
+              <h3 className="text-black font-semibold text-md mb-2">
+                {productArray.nameOfProduct}
+              </h3>
+              <p className="text-black font-bold text-lg mb-1">
+                ₦{productArray.ammountOfProduct}
+              </p>
+
+              {/* Shop Now Button */}
+              <button className="w-full text-logo-orange font-bold py-2 border border-logo-orange rounded-lg hover:bg-blue-100">
+                Shop now
+              </button>
+            </div>
+          </div>
+        </Link>
+      ))}
+
         {storedProduct.map((productArray: { productImage: string | undefined; nameOfProduct: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; ammountOfProduct: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; }, index: Key | null | undefined) => (
           <Link key={index} to={`/shop/${index}`}>
             <div className="bg-white shadow-md rounded-lg overflow-hidden">

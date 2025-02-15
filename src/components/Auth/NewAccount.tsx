@@ -8,6 +8,7 @@ import { MobileNav } from "../mobileComponents/MobileNav";
 export const NewAccount: React.FC = () => {
   const [value, setValue] = useState("");
   const [email, setEmail] = useState<string | undefined>("");
+  const [address, setAddress] = useState<string | undefined>("");
   const [phoneNumber, setPhoneNumber] = useState<number | undefined>(0);
   const [password, setPassword] = useState<string | undefined>("");
   const [confirmPassword, setConfirmPassword] = useState<string | undefined>(
@@ -17,7 +18,7 @@ export const NewAccount: React.FC = () => {
   const navigate = useNavigate();
 
   const handleSubmit = () => {
-    if (!value || !email || !phoneNumber || !password || !confirmPassword) {
+    if (!value || !email || !phoneNumber || !password || !confirmPassword || !address) {
       alert("Please fill all fields.");
       return;
     }
@@ -32,6 +33,7 @@ export const NewAccount: React.FC = () => {
       email,
       phoneNumber,
       password,
+      address
     };
 
     localStorage.setItem("formData", JSON.stringify(dataToSave));
@@ -53,6 +55,9 @@ export const NewAccount: React.FC = () => {
 
   const handlePassword = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setPassword(e.target.value);
+  };
+  const handleAddress = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setAddress(e.target.value);
   };
 
   const handleConfirmPassword = (
@@ -140,6 +145,25 @@ export const NewAccount: React.FC = () => {
                   required
                   value={phoneNumber}
                   onChange={handlePhoneNumber}
+                  id="phoneNumber"
+                  placeholder="Your phone number"
+                  className="w-full border border-gray-300 rounded-lg px-4 py-2"
+                />
+              </div>
+
+              {/* Address */}
+              <div>
+                <label
+                  htmlFor="phoneNumber"
+                  className="block text-gray-700 font-bold mb-2"
+                >
+                  Address
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={address}
+                  onChange={handleAddress}
                   id="phoneNumber"
                   placeholder="Your phone number"
                   className="w-full border border-gray-300 rounded-lg px-4 py-2"
