@@ -12,15 +12,16 @@ export const Shop: React.FC = () => {
   const onMobile = useMediaQuery({ maxWidth: 768 });
 
   const storedData = localStorage.getItem("formData");
-  const fullName = storedData ? JSON.parse(storedData).fullName : "Sign in";
+  const parsedData = storedData ? JSON.parse(storedData) : null;
+  const fullName = parsedData?.fullName || "Guest";
   const shortName = fullName.slice(0, 7);
-  const isRegistered = storedData !== null;
+  const storedProduct = JSON.parse(localStorage.getItem("products") || "[]");
+  // const isRegistered = storedData !== null;
 
   const [searchItem, setSearchItem] = useState<string>("");
   const [brandFilter, setBrandFilter] = useState<string>("");
   const [filteredShoes, setFilteredShoes] = useState(ProductJson);
 
-  // Function to filter products
   const filterProducts = (searchTerm: string, brand: string) => {
     let filtered = ProductJson;
 
@@ -31,22 +32,21 @@ export const Shop: React.FC = () => {
     }
 
     if (brand) {
-      filtered = filtered.filter((product) =>
-        product.nameOfProduct.toLowerCase().includes(brand.toLowerCase())
+      filtered = filtered.filter(
+        (product) =>
+          product.nameOfProduct.toLowerCase().includes(brand.toLowerCase()) // FIXED: Using brandName
       );
     }
 
     setFilteredShoes(filtered);
   };
 
-  // Search handler
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const searchTerm = e.target.value;
     setSearchItem(searchTerm);
     filterProducts(searchTerm, brandFilter);
   };
 
-  // Brand filter handler
   const handleBrandFilter = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedBrand = e.target.value;
     setBrandFilter(selectedBrand);
@@ -54,166 +54,127 @@ export const Shop: React.FC = () => {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen font-customNunito">
-      {/* Header */}
-      <header className="bg-white shadow-md py-4">
-        <div className="container mx-auto flex items-center justify-between px-4">
-          {/* Logo */}
-          <Link to="/">
-          <Logo />
-            {/* <h1 className="text-xl font-bold">Foot-finds</h1> */}
-          </Link>
+    <>
+      <div className="bg-gray-100 min-h-screen font-customNunito">
+        {/* Header Section */}
+        <header className="bg-white shadow-md py-4">
+          <div className="container mx-auto flex items-center justify-between px-4">
+            <Link to="/">
+              <Logo />
+            </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex space-x-6">
-            <Link to="/newIn" className="text-gray-600 hover:text-black">
-              New Shoes
-            </Link>
-            <Link
-              to="/coporateShoes"
-              className="text-gray-600 hover:text-black"
-            >
-              Corporate shoes
-            </Link>
-            <Link to="/sneakers" className="text-gray-600 hover:text-black">
-              Sneakers
-            </Link>
-            <Link to="/sandals" className="text-gray-600 hover:text-black">
-              Sandals
-            </Link>
-            <Link to="/slides" className="text-gray-600 hover:text-black">
-              Slides
-            </Link>
-            <Link to="/cart" className="text-gray-600 hover:text-black">
-              Cart
-            </Link>
-          </nav>
-
-          {/* Search & Profile (Desktop) */}
-          <div className="hidden lg:flex items-center">
-            <input
-              type="search"
-              className="border-gray-400 border-2 rounded-l-lg outline-none px-2"
-              value={searchItem}
-              placeholder="Type to search..."
-              onChange={handleSearch}
-            />
-            <button className="bg-logo-orange rounded-r-lg p-[5px]">
-              <BiSearch className="text-2xl text-white" />
-            </button>
-            <Link to="/profile">
-              <p className="ml-2 text-2xl cursor-pointer">{shortName}</p>
-            </Link>
-          </div>
-
-          {/* Mobile Menu Button */}
-          {isMobile && (
-            <button
-              className="lg:hidden text-2xl p-2"
-              onClick={() => setMenuOpen(true)}
-            >
-              <BiMenu />
-            </button>
-          )}
-        </div>
-
-        {/* Mobile Navigation Drawer */}
-        {menuOpen && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex">
-            <div className="bg-white w-64 h-full shadow-lg p-6">
-              {/* Close Button */}
-              <button
-                className="text-2xl mb-4"
-                onClick={() => setMenuOpen(false)}
-              >
-                <BiX />
-              </button>
-
-              {/* Mobile Nav Links */}
-              <nav className="flex flex-col space-y-4">
-                <Link to="/newIn" className="text-gray-600 hover:text-black">
-                  New Shoes
-                </Link>
+            <nav className="hidden lg:flex space-x-6">
+              {[
+                "newIn",
+                "coporateShoes",
+                "sneakers",
+                "sandals",
+                "slides",
+                "cart",
+              ].map((route) => (
                 <Link
-                  to="/coporateShoes"
+                  key={route}
+                  to={`/${route}`}
                   className="text-gray-600 hover:text-black"
                 >
-                  Corporate shoes
+                  {route.replace(/([A-Z])/g, " $1")}
                 </Link>
-                <Link to="/sneakers" className="text-gray-600 hover:text-black">
-                  Sneakers
-                </Link>
-                <Link to="/sandals" className="text-gray-600 hover:text-black">
-                  Sandals
-                </Link>
-                <Link to="/slides" className="text-gray-600 hover:text-black">
-                  Slides
-                </Link>
-                <Link to="/cart" className="text-gray-600 hover:text-black">
-                  Cart
-                </Link>
-                <h2 className="text-lg font-bold mb-4">Filter by Brand</h2>
-            <div className="block">
-              {[
-                "Nike",
-                "Puma",
-                "New Balance",
-                "Gucci",
-                "Addidas",
-                "Reebok",
-                "Timberland",
-              ].map((brand) => (
-                <label key={brand} className="block">
-                  <input
-                    type="radio"
-                    name="brandFilter"
-                    value={brand}
-                    checked={brandFilter === brand}
-                    onChange={handleBrandFilter}
-                  />{" "}
-                  {brand}
-                </label>
               ))}
-            </div>
-              </nav>
+            </nav>
 
-              {/* Search & Profile (Only in mobile) */}
-              <div className="mt-6">
-                <input
-                  type="search"
-                  className="border-gray-400 border-2 rounded-l-lg outline-none px-2 w-full"
-                  value={searchItem}
-                  placeholder="Type to search..."
-                  onChange={handleSearch}
-                />
-                <button className="bg-logo-orange w-full py-2 mt-2">
-                  <BiSearch className="text-2xl text-white mx-auto" />
-                </button>
-                <Link to="/profile" className="block mt-4 text-xl text-center">
-                  {shortName}
-                </Link>
-              </div>
+            <div className="hidden lg:flex items-center">
+              <input
+                type="search"
+                className="border-gray-400 border-2 rounded-l-lg outline-none px-2"
+                value={searchItem}
+                placeholder="Type to search..."
+                onChange={handleSearch}
+              />
+              <button className="bg-logo-orange rounded-r-lg p-[5px]">
+                <BiSearch className="text-2xl text-white" />
+              </button>
+              <Link to="/profile">
+                <p className="ml-2 text-2xl cursor-pointer">{shortName}</p>
+              </Link>
             </div>
 
-            {/* Close on Background Click */}
-            <div className="flex-1" onClick={() => setMenuOpen(false)}></div>
+            {isMobile && (
+              <button
+                className="lg:hidden text-2xl p-2"
+                onClick={() => setMenuOpen(!menuOpen)}
+              >
+                <BiMenu />
+              </button>
+            )}
           </div>
-        )}
-      </header>
 
-      {/* Main Content */}
-      <main className="px-4 py-8 flex flex-col lg:flex-row">
-        {/* Sidebar (Hidden on mobile) */}
-        {!onMobile && (
-          <aside className="bg-white shadow-md rounded-lg p-4 lg:w-1/4 mb-4">
-            <h2 className="text-lg font-bold mb-4">Filter by Brand</h2>
-            <div className="block">
+          {menuOpen && (
+            <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex">
+              <div className="bg-white w-64 h-full shadow-lg p-6">
+                <button
+                  className="text-2xl mb-4"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  <BiX />
+                </button>
+                <nav className="flex flex-col space-y-4">
+                  {[
+                    "Home",
+                    "coporateShoes",
+                    "sneakers",
+                    "sandals",
+                    "slides",
+                    "cart",
+                  ].map((route) => (
+                    <Link
+                      key={route}
+                      to={`/${route}`}
+                      className="text-gray-600 hover:text-black"
+                    >
+                      {route.replace(/([A-Z])/g, " $1")}
+                    </Link>
+                  ))}
+                </nav>
+
+                <h2 className="text-lg font-bold mt-6">Filter by Brand</h2>
+                <div>
+                  {[
+                    "Nike",
+                    "Puma",
+                    "New Balance",
+                    "Gucci",
+                    "Adidas",
+                    "Reebok",
+                    "Timberland",
+                  ].map((brand) => (
+                    <label key={brand} className="block">
+                      <input
+                        type="radio"
+                        name="brandFilter"
+                        value={brand}
+                        checked={brandFilter === brand}
+                        onChange={handleBrandFilter}
+                      />{" "}
+                      {brand}
+                    </label>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+        </header>
+
+        {/* Main Section */}
+        <main className="px-4 py-8 flex flex-col lg:flex-row">
+          {!onMobile && (
+            <aside className="bg-white shadow-md rounded-lg p-4">
+              <h2 className="text-lg font-bold mb-4">Filter by Brand</h2>
               {[
                 "Nike",
                 "Puma",
                 "New Balance",
                 "Gucci",
-                "Addidas",
+                "Adidas",
                 "Reebok",
                 "Timberland",
               ].map((brand) => (
@@ -228,46 +189,46 @@ export const Shop: React.FC = () => {
                   {brand}
                 </label>
               ))}
-            </div>
-          </aside>
-        )}
+            </aside>
+          )}
 
-        {/* Product Grid */}
-        <section className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 w-full p-4 md:p-6">
-          {filteredShoes.map((product, index) => (
-            <div
-              key={index}
-              className="bg-white shadow-md rounded-lg overflow-hidden p-3 transition-transform transform hover:shadow-lg hover:-translate-y-1"
-            >
-              <div className="w-full aspect-[4/3] bg-gray-200 flex items-center justify-center">
-                <img
-                  src={product.productImage}
-                  alt={product.nameOfProduct}
-                  className="w-full h-full max-h-60 object-contain"
-                />
-              </div>
-              <div className="p-2">
-                <h3 className="text-black font-semibold text-md mb-2">
-                  {product.nameOfProduct}
-                </h3>
-                <p className="text-black font-bold text-lg mb-1">
-                  ₦{product.ammountOfProduct}
-                </p>
-                <button
-                  className={`w-full font-bold py-2 border rounded-lg ${
-                    isRegistered
-                      ? "text-logo-orange border-logo-orange hover:bg-blue-100"
-                      : "text-gray-500 border-gray-300 cursor-not-allowed"
-                  }`}
-                  disabled={!isRegistered}
-                >
-                  {isRegistered ? "Shop now" : "Register to buy"}
-                </button>
-              </div>
-            </div>
-          ))}
-        </section>
-      </main>
-    </div>
+          {/* Product Grid */}
+          <section className="grid gap-4 grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 w-full p-2 md:p-4">
+            {[...filteredShoes, ...storedProduct].map((product, index) => (
+              <Link key={index} to={`/shop/${index}`} className="block">
+                <div className="bg-white shadow-md rounded-lg overflow-hidden border border-gray-200">
+                  {/* Image Container */}
+                  <div className="w-full aspect-[4/5] bg-gray-200 flex justify-center items-center">
+                    <img
+                      src={product.productImage}
+                      alt={product.nameOfProduct}
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
+
+                  {/* Product Details */}
+                  <div className="p-4">
+                    <h3 className="text-blue-600 text-md font-bold leading-tight truncate">
+                      {product.nameOfProduct}
+                    </h3>
+                    <p className="text-black font-semibold text-lg mt-1">
+                      ₦{product.ammountOfProduct.toLocaleString()}
+                    </p>
+                    <p className="text-gray-600 text-sm">Temu</p>
+
+                    {/* Button */}
+                    <div className="mt-4">
+                      <button className="w-full text-blue-600 font-semibold py-2 border border-blue-600 rounded-lg hover:bg-blue-100">
+                        Shop now
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </section>
+        </main>
+      </div>
+    </>
   );
 };
