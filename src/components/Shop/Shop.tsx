@@ -64,22 +64,24 @@ export const Shop: React.FC = () => {
             </Link>
 
             <nav className="hidden lg:flex space-x-6">
-              {[
-                "newIn",
-                "coporateShoes",
-                "sneakers",
-                "sandals",
-                "slides",
-                "cart",
-              ].map((route) => (
-                <Link
-                  key={route}
-                  to={`/${route}`}
-                  className="text-gray-600 hover:text-black"
-                >
-                  {route.replace(/([A-Z])/g, " $1")}
-                </Link>
-              ))}
+            <Link to={'/'}>
+                  Home
+                  </Link>
+                  <Link to={'/about'}>
+                  About
+                  </Link>
+                  <Link to={'/shop'}>
+                  Shop
+                  </Link>
+                  <Link to={'/profile'}>
+                  Profile
+                  </Link>
+                  <Link to={'/contact'}>
+                  Contact us
+                  </Link>
+                  <Link to={'/admin'}>
+                    Admin
+                  </Link>
             </nav>
 
             <div className="hidden lg:flex items-center">
@@ -118,22 +120,24 @@ export const Shop: React.FC = () => {
                   <BiX />
                 </button>
                 <nav className="flex flex-col space-y-4">
-                  {[
-                    "Home",
-                    "coporateShoes",
-                    "sneakers",
-                    "sandals",
-                    "slides",
-                    "cart",
-                  ].map((route) => (
-                    <Link
-                      key={route}
-                      to={`/${route}`}
-                      className="text-gray-600 hover:text-black"
-                    >
-                      {route.replace(/([A-Z])/g, " $1")}
-                    </Link>
-                  ))}
+                  <Link to={'/'}>
+                  Home
+                  </Link>
+                  <Link to={'/about'}>
+                  About
+                  </Link>
+                  <Link to={'/shop'}>
+                  Shop
+                  </Link>
+                  <Link to={'/profile'}>
+                  Profile
+                  </Link>
+                  <Link to={'/contact'}>
+                  Contact us
+                  </Link>
+                  <Link to={'/admin'}>
+                    Admin
+                  </Link>
                 </nav>
 
                 <h2 className="text-lg font-bold mt-6">Filter by Brand</h2>
@@ -208,17 +212,16 @@ export const Shop: React.FC = () => {
 
                   {/* Product Details */}
                   <div className="p-4">
-                    <h3 className="text-blue-600 text-md font-bold leading-tight truncate">
+                    <h3 className="text-logo-orange text-md font-bold leading-tight truncate">
                       {product.nameOfProduct}
                     </h3>
                     <p className="text-black font-semibold text-lg mt-1">
                       ₦{product.ammountOfProduct.toLocaleString()}
                     </p>
-                    <p className="text-gray-600 text-sm">Temu</p>
 
                     {/* Button */}
                     <div className="mt-4">
-                      <button className="w-full text-blue-600 font-semibold py-2 border border-blue-600 rounded-lg hover:bg-blue-100">
+                      <button className="w-full text-logo-orange font-semibold py-2 border border-logo-orange rounded-lg hover:bg-blue-100">
                         Shop now
                       </button>
                     </div>
