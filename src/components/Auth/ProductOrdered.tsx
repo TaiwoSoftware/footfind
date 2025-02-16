@@ -70,7 +70,7 @@ export const ProductOrdered: React.FC = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            Return to Home
+            Register
           </motion.button>
         </Link>
       </div>
