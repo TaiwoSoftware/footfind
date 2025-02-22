@@ -4,7 +4,6 @@ import { useState } from "react";
 import { ProductJson } from "./ProductJson";
 import { useMediaQuery } from "react-responsive";
 import "./shop.css";
-import Logo from "../Logo";
 
 export const Shop: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -60,28 +59,17 @@ export const Shop: React.FC = () => {
         <header className="bg-white shadow-md py-4">
           <div className="container mx-auto flex items-center justify-between px-4">
             <Link to="/">
-              <Logo />
+              {/* <Logo /> */}
+              <h1 className="text-logo-orange text-3xl font-bold">Foot-Find</h1>
             </Link>
 
             <nav className="hidden lg:flex space-x-6">
-            <Link to={'/'}>
-                  Home
-                  </Link>
-                  <Link to={'/about'}>
-                  About
-                  </Link>
-                  <Link to={'/shop'}>
-                  Shop
-                  </Link>
-                  <Link to={'/profile'}>
-                  Profile
-                  </Link>
-                  <Link to={'/contact'}>
-                  Contact us
-                  </Link>
-                  <Link to={'/admin'}>
-                    Admin
-                  </Link>
+              <Link to={"/"}>Home</Link>
+              <Link to={"/about"}>About</Link>
+              <Link to={"/shop"}>Shop</Link>
+              <Link to={"/profile"}>Profile</Link>
+              <Link to={"/contact"}>Contact us</Link>
+              <Link to={"/admin"}>Admin</Link>
             </nav>
 
             <div className="hidden lg:flex items-center">
@@ -120,24 +108,13 @@ export const Shop: React.FC = () => {
                   <BiX />
                 </button>
                 <nav className="flex flex-col space-y-4">
-                  <Link to={'/'}>
-                  Home
-                  </Link>
-                  <Link to={'/about'}>
-                  About
-                  </Link>
-                  <Link to={'/shop'}>
-                  Shop
-                  </Link>
-                  <Link to={'/profile'}>
-                  Profile
-                  </Link>
-                  <Link to={'/contact'}>
-                  Contact us
-                  </Link>
-                  <Link to={'/admin'}>
-                    Admin
-                  </Link>
+                  <Link to={"/"}>Home</Link>
+                  <Link to={"/about"}>About</Link>
+                  <Link to={"/shop"}>Shop</Link>
+                  <Link to={"/profile"}>Profile</Link>
+                  <Link to={"/contact"}>Contact us</Link>
+                  <Link to={"/admin"}>Admin</Link>
+                  
                 </nav>
 
                 <h2 className="text-lg font-bold mt-6">Filter by Brand</h2>
@@ -178,7 +155,7 @@ export const Shop: React.FC = () => {
                 "Puma",
                 "New Balance",
                 "Gucci",
-                "Adidas",
+                "Addidas",
                 "Reebok",
                 "Timberland",
               ].map((brand) => (
