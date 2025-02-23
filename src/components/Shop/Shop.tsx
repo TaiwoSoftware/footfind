@@ -107,6 +107,15 @@ export const Shop: React.FC = () => {
                 >
                   <BiX />
                 </button>
+                <div className="mb-4">
+                  <input
+                    type="search"
+                    className="border-gray-400 border-2 rounded-lg outline-none px-3 py-2 w-full"
+                    value={searchItem}
+                    placeholder="Search products..."
+                    onChange={handleSearch}
+                  />
+                </div>
                 <nav className="flex flex-col space-y-4">
                   <Link to={"/"}>Home</Link>
                   <Link to={"/about"}>About</Link>
