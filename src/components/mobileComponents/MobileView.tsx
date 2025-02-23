@@ -45,7 +45,7 @@ const MobileView: React.FC = () => {
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.5 }}
-                  className="px-6  bg-white text-black font-bold rounded-full mt-4"
+                  className="px-8 py-2  bg-white text-black font-bold rounded-full mt-4"
                 >
                   Get Started
                 </motion.button>
