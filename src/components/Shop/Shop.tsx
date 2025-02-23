@@ -114,7 +114,6 @@ export const Shop: React.FC = () => {
                   <Link to={"/profile"}>Profile</Link>
                   <Link to={"/contact"}>Contact us</Link>
                   <Link to={"/admin"}>Admin</Link>
-                  
                 </nav>
 
                 <h2 className="text-lg font-bold mt-6">Filter by Brand</h2>
@@ -198,7 +197,14 @@ export const Shop: React.FC = () => {
 
                     {/* Button */}
                     <div className="mt-4">
-                      <button className="w-full text-logo-orange font-semibold py-2 border border-logo-orange rounded-lg hover:bg-blue-100">
+                      <button
+                        className={`w-full font-semibold py-2 border rounded-lg ${
+                          storedData
+                            ? "text-logo-orange border-logo-orange hover:bg-blue-100"
+                            : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                        }`}
+                        disabled={!storedData} // Disable button if user is not registered
+                      >
                         Shop now
                       </button>
                     </div>
