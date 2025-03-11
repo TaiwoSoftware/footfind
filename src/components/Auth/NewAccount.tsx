@@ -165,7 +165,7 @@ export const NewAccount: React.FC = () => {
                   value={address}
                   onChange={handleAddress}
                   id="phoneNumber"
-                  placeholder="Your phone number"
+                  placeholder="Your address"
                   className="w-full border border-gray-300 rounded-lg px-4 py-2"
                 />
               </div>
