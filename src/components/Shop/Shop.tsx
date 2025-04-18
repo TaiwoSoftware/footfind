@@ -6,6 +6,7 @@ import { useMediaQuery } from "react-responsive";
 import "./shop.css";
 
 export const Shop: React.FC = () => {
+  const [colorFilter, setColorFilter] = useState<string>("");
   const [menuOpen, setMenuOpen] = useState(false);
   const isMobile = useMediaQuery({ maxWidth: 1024 });
   const onMobile = useMediaQuery({ maxWidth: 768 });
@@ -21,7 +22,7 @@ export const Shop: React.FC = () => {
   const [brandFilter, setBrandFilter] = useState<string>("");
   const [filteredShoes, setFilteredShoes] = useState(ProductJson);
 
-  const filterProducts = (searchTerm: string, brand: string) => {
+  const filterProducts = (searchTerm: string, brand: string, color: string) => {
     let filtered = ProductJson;
 
     if (searchTerm) {
@@ -31,9 +32,14 @@ export const Shop: React.FC = () => {
     }
 
     if (brand) {
-      filtered = filtered.filter(
-        (product) =>
-          product.nameOfProduct.toLowerCase().includes(brand.toLowerCase()) // FIXED: Using brandName
+      filtered = filtered.filter((product) =>
+        product.nameOfProduct.toLowerCase().includes(brand.toLowerCase())
+      );
+    }
+
+    if (color) {
+      filtered = filtered.filter((product) =>
+        product.nameOfProduct.toLowerCase().includes(color.toLowerCase())
       );
     }
 
@@ -43,13 +49,18 @@ export const Shop: React.FC = () => {
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const searchTerm = e.target.value;
     setSearchItem(searchTerm);
-    filterProducts(searchTerm, brandFilter);
+    filterProducts(searchTerm, brandFilter, colorFilter);
   };
 
   const handleBrandFilter = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedBrand = e.target.value;
     setBrandFilter(selectedBrand);
-    filterProducts(searchItem, selectedBrand);
+    filterProducts(searchItem, selectedBrand, colorFilter);
+  };
+  const handleColorFilter = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedColor = e.target.value;
+    setColorFilter(selectedColor);
+    filterProducts(searchItem, brandFilter, selectedColor);
   };
 
   return (
@@ -148,6 +159,23 @@ export const Shop: React.FC = () => {
                     </label>
                   ))}
                 </div>
+                <h2 className="text-lg font-bold mt-6">Filter by Color</h2>
+                <div>
+                  {["White", "Black", "Red", "Cream", "Blue"].map(
+                    (color) => (
+                      <label key={color} className="block">
+                        <input
+                          type="radio"
+                          name="colorFilter"
+                          value={color}
+                          checked={colorFilter === color}
+                          onChange={handleColorFilter}
+                        />{" "}
+                        {color}
+                      </label>
+                    )
+                  )}
+                </div>
               </div>
             </div>
           )}
@@ -178,6 +206,23 @@ export const Shop: React.FC = () => {
                   {brand}
                 </label>
               ))}
+              <h2 className="text-lg font-bold mt-6">Filter by Color</h2>
+              <div>
+                {["White", "Black", "Red", "Cream", "Blue"].map(
+                  (color) => (
+                    <label key={color} className="block">
+                      <input
+                        type="radio"
+                        name="colorFilter"
+                        value={color}
+                        checked={colorFilter === color}
+                        onChange={handleColorFilter}
+                      />{" "}
+                      {color}
+                    </label>
+                  )
+                )}
+              </div>
             </aside>
           )}
 
