@@ -136,7 +136,7 @@ export const Shop: React.FC = () => {
                   <Link to={"/shop"}>Shop</Link>
                   <Link to={"/profile"}>Profile</Link>
                   <Link to={"/contact"}>Contact us</Link>
-                  <Link to={"/cart"}>cart</Link>
+                  <Link to={"/cart"}> <FaShoppingCart className="text-logo-orange text-3xl" /></Link>
                 </nav>
 
                 <h2 className="text-lg font-bold mt-6">Filter by Brand</h2>
