@@ -3,6 +3,7 @@ import { BiSearch, BiMenu, BiX } from "react-icons/bi";
 import { useState } from "react";
 import { ProductJson } from "./ProductJson";
 import { useMediaQuery } from "react-responsive";
+import { FaShoppingCart } from "react-icons/fa";
 import "./shop.css";
 
 export const Shop: React.FC = () => {
@@ -80,7 +81,9 @@ export const Shop: React.FC = () => {
               <Link to={"/shop"}>Shop</Link>
               <Link to={"/profile"}>Profile</Link>
               <Link to={"/contact"}>Contact us</Link>
-              <Link to={"/admin"}>Admin</Link>
+              <Link to={"/cart"}>
+              <FaShoppingCart className="text-logo-orange text-3xl" />
+              </Link>
             </nav>
 
             <div className="hidden lg:flex items-center">
@@ -133,7 +136,7 @@ export const Shop: React.FC = () => {
                   <Link to={"/shop"}>Shop</Link>
                   <Link to={"/profile"}>Profile</Link>
                   <Link to={"/contact"}>Contact us</Link>
-                  <Link to={"/admin"}>Admin</Link>
+                  <Link to={"/cart"}>cart</Link>
                 </nav>
 
                 <h2 className="text-lg font-bold mt-6">Filter by Brand</h2>
