@@ -11,7 +11,6 @@ import blackShiningHalfShoe from "./ProductImages/named-new-shoe/black-shinig-ha
 import blackShining from "./ProductImages/named-new-shoe/black-shining.jpg";
 import blackTimberLand from "./ProductImages/named-new-shoe/black-timberland.jpg";
 import blueNewBalance from "./ProductImages/named-new-shoe/blue-new-balance.jpg";
-// import boot from "./ProductImages/named-new-shoe/boot.jpg";
 import brownBiggerShoe from "./ProductImages/named-new-shoe/brown-bigger-shoe.jpg";
 import brownNice from "./ProductImages/named-new-shoe/brown-nice.jpg";
 import creamAddidas from "./ProductImages/named-new-shoe/cream-addidas.jpg";
@@ -89,426 +88,511 @@ export const ProductJson: ProductProps[] = [
     productImage: brownNice,
     nameOfProduct: "Brown Nike",
     ammountOfProduct: 150000,
+    size:40
   },
   {
     productImage: nikeCream,
     nameOfProduct: "Nike Cream",
     ammountOfProduct: 250000,
+    size:42
   },
   {
     productImage: highShoe,
     nameOfProduct: "Puma High fashioned",
     ammountOfProduct: 200000,
+    size:41
   },
   {
     productImage: blackShiningHalfShoe,
     nameOfProduct: "Gucci black and shinning",
     ammountOfProduct: 150000,
+    size:46
   },
   {
     productImage: rebookDesign,
     nameOfProduct: "Reebok Design",
     ammountOfProduct: 150000,
+    size:43
   },
   {
     productImage:blackNewBalance,
     nameOfProduct: "Black New Balance",
     ammountOfProduct: 100000,
+    size:48
   },
   {
     productImage: nikeSliddy,
     nameOfProduct: "Nike Shoe",
     ammountOfProduct:150000,
+    size:40
   },
   {
     productImage: lightBrown,
     nameOfProduct: "Gucci Brown Shoe",
-    ammountOfProduct: 250000
+    ammountOfProduct: 250000,
+    size:44
   },
   {
     productImage:brownishBlackShoe,
     nameOfProduct: "Gucci Design",
-    ammountOfProduct: 300000
+    ammountOfProduct: 300000,
+    size:46
   },
   {
     productImage: blackAndwhitePuma,
     nameOfProduct: "Puma style",
     ammountOfProduct: 300000,
+    size:47
   },
   {
     productImage: timberLandStandard,
     nameOfProduct: "Timberland",
-    ammountOfProduct: 450000
+    ammountOfProduct: 450000,
+    size:48
   },
   {
     productImage:rebookBlackRed,
     nameOfProduct: "Rebook rock",
-    ammountOfProduct:300000
+    ammountOfProduct:300000,
+    size:49
   },
   {
     productImage: addidasStipe,
     nameOfProduct: "Stripe Addidas",
-    ammountOfProduct: 250000
+    ammountOfProduct: 250000,
+    size:43
   },
   {
     productImage: ashAddidas,
     nameOfProduct: "Addidas Ash",
-    ammountOfProduct: 200000
+    ammountOfProduct: 200000,
+    size:46
   },
   {
     productImage: blackHalfShoe,
     nameOfProduct: "New Balance Black Shoe",
-    ammountOfProduct: 150000
+    ammountOfProduct: 150000,
+    size:47
   },
   {
     productImage: blackShining,
     nameOfProduct: "Addidas",
-    ammountOfProduct: 50000
+    ammountOfProduct: 50000,
+    size:45
   },
   {
     productImage: blackTimberLand,
     nameOfProduct: "Black Timberland",
-    ammountOfProduct:300000
+    ammountOfProduct:300000,
+    size:42
   },
 
   {
     productImage: creamAddidas,
     nameOfProduct: "Addidas",
-    ammountOfProduct: 250000
+    ammountOfProduct: 250000,
+    size:43
   },
   {
     productImage:addidasBlack,
     nameOfProduct: "Black Addidas",
-    ammountOfProduct: 50000
+    ammountOfProduct: 50000,
+    size:44
   },
   {
     productImage:blueNewBalance,
     nameOfProduct: "New Balance",
-    ammountOfProduct: 50000
+    ammountOfProduct: 50000,
+    size:47
   },
   {
     productImage: blue,
     nameOfProduct: "Nike Bluesneaker",
     ammountOfProduct: 20000,
+    size:42
   },
   {
     productImage: redPuma,
     nameOfProduct: "Red Puma",
     ammountOfProduct: 50000,
+    size:43
   },
   {
     productImage: addidasBoot,
     nameOfProduct: "Addidas Boot",
-    ammountOfProduct: 50000
+    ammountOfProduct: 50000,
+    size:44
   },
   {
     productImage: brownBiggerShoe,
     nameOfProduct: "Gucci",
-    ammountOfProduct: 100000
+    ammountOfProduct: 100000,
+    size:45
   },
   {
     productImage:design,
     nameOfProduct: "Reebok",
-    ammountOfProduct: 200000
+    ammountOfProduct: 200000,
+    size:47
   },
   {
     productImage: sneakersOne,
     nameOfProduct: "Reebok shoes",
     ammountOfProduct:50000,
+    size:42
   },
   {
     productImage: sneakerTwo,
     nameOfProduct: "Addidas white sneaker",
     ammountOfProduct: 50000,
+    size:45
   },
   {
     productImage: greenAsh,
     nameOfProduct: "New Balance",
     ammountOfProduct: 150000,
+    size:40
   },
   {
     productImage: gucciOne,
     nameOfProduct: "Gucci Black shoe",
     ammountOfProduct: 10000,
+    size:41
   },
   {
     productImage:greenTimberland,
     nameOfProduct: "Green Timberland",
-    ammountOfProduct:300000
+    ammountOfProduct:300000,
+    size:43
   },
   {
     productImage: addidas,
     nameOfProduct: "Addidas Black shoe",
     ammountOfProduct: 10000,
+    size:44
   },
   {
     productImage: longTimberLand,
     nameOfProduct: "Timberland",
-    ammountOfProduct:300000
+    ammountOfProduct:300000,
+    size:47
   },
   {
     productImage: ashNewBalance,
     nameOfProduct: "Shan New Balance",
-    ammountOfProduct: 200000
+    ammountOfProduct: 200000,
+    size:46
   }, 
   {
     productImage: newBalanceBlunt,
     nameOfProduct: "Reebok",
     ammountOfProduct: 150000,
+    size:45
   }, 
   {
     productImage: nikeMultiColor,
     nameOfProduct: "Nike Design",
-    ammountOfProduct:450000
+    ammountOfProduct:450000,
+    size:42
   },
   {
     productImage:pumaBrownSlide,
     nameOfProduct: "Reebok",
     ammountOfProduct:450000,
+    size:46
   },
   {
     productImage: puma,
     nameOfProduct: "Puma Blue shoe",
     ammountOfProduct: 50000,
+    size:49
   },
   {
     productImage:rebookBlack,
     nameOfProduct: "Reebok Black",
-    ammountOfProduct: 500000
+    ammountOfProduct: 500000,
+    size:48
   },
   {
     productImage:rebookCoporate,
     nameOfProduct: "Reebok Coporate",
-    ammountOfProduct: 50000
+    ammountOfProduct: 50000,
+    size:47
   },
   {
     productImage: rebookDesignWhite,
     nameOfProduct: "Reebok White",
-    ammountOfProduct: 150000
+    ammountOfProduct: 150000,
+    size:46
   },
   {
     productImage: coporateOne,
     nameOfProduct: "Gucci Half Cover",
     ammountOfProduct: 100000,
+    size:40
   },
   {
     productImage: coporateTwo,
     nameOfProduct: "Nike full cover",
     ammountOfProduct: 50000,
+    size:40
   },
   {
     productImage: coporateThree,
     nameOfProduct: " Puma Brown cover shoes",
     ammountOfProduct: 20000,
+    size:42
   },
   {
     productImage: gucciTwo,
     nameOfProduct: "Highrise Gucci shoe",
     ammountOfProduct: 50000,
+    size:44
   },
   {
     productImage: addidasTwo,
     nameOfProduct: "addidas coporate shoes",
     ammountOfProduct: 20500,
+    size:43
   },
   {
     productImage: rebookStyle,
     nameOfProduct: "Reebok Style",
-    ammountOfProduct: 50000
+    ammountOfProduct: 50000,
+    size:44
   },
   {
     productImage:rebookDesignWhite,
     nameOfProduct: "Reebok White",
-    ammountOfProduct: 150000
+    ammountOfProduct: 150000,
+    size:45
   },
   {
     productImage: rebookWhiteBlue,
     nameOfProduct: "Reebok",
     ammountOfProduct:100000,
+    size:41
   },
   {
     productImage: rebookWhiteHarsh,
     nameOfProduct: "Reebok",
     ammountOfProduct:100000,
+    size:42
   },
   {
     productImage:redRebook,
     nameOfProduct: "Reebok",
     ammountOfProduct:150000,
+    size:41
   },
   {
     productImage:rebookWhite,
     nameOfProduct: "Reebok",
-    ammountOfProduct:70000
+    ammountOfProduct:70000,
+    size:46
   },
   {
     productImage: strippingAddidas,
     nameOfProduct: "Addidas",
     ammountOfProduct:100000,
+    size:46
   },
   {
     productImage: timberGreen,
     nameOfProduct: "Timberland",
-    ammountOfProduct: 350000
+    ammountOfProduct: 350000,
+    size:40
   },
   {
     productImage:timberShort,
     nameOfProduct: "Timberland",
     ammountOfProduct: 300000,
+    size:47
   }, 
   {
     productImage:whiteBrownPuma,
     nameOfProduct: "puma",
-    ammountOfProduct:250000
+    ammountOfProduct:250000,
+    size:42
   },
   {
     productImage: pumaOne,
     nameOfProduct: "Puma black shoe",
     ammountOfProduct: 20000,
+    size:44
   },
   {
     productImage: sandalsOne,
     nameOfProduct: "Addidas Black sandals",
     ammountOfProduct: 10000,
+    size:43
   },
   {
     productImage: sandalsTwo,
     nameOfProduct: "New balance black sandals",
     ammountOfProduct: 50000,
+    size:46
   },
   {
     productImage: sandalsThree,
     nameOfProduct: "Gucci Black sandals",
     ammountOfProduct: 50000,
+    size:44
   },
   {
     productImage: gucciNine,
     nameOfProduct: "Gucci black palm",
     ammountOfProduct: 45000,
+    size:40
   },
   {
     productImage: gucciEleven,
     nameOfProduct: "Pure Gucci black palm",
     ammountOfProduct: 30000,
+    size:43
   },
   {
     productImage: gucciTwelve,
     nameOfProduct: "Gucci black palm",
     ammountOfProduct: 15000,
+    size:45
   },
   {
     productImage: bluePalm,
     nameOfProduct: " Nike Beach Palm",
     ammountOfProduct: 45000,
+    size:45
   },
   {
     productImage: purplePalm,
     nameOfProduct: "Nike slide",
     ammountOfProduct: 30000,
+    size:40
   },
   {
     productImage: timberland,
     nameOfProduct: "Timberland",
     ammountOfProduct: 10000,
+    size:46
   },
   {
     productImage: yee,
     nameOfProduct: "Puma",
     ammountOfProduct: 30000,
+    size:44
   },
   {
     productImage: nicee,
     nameOfProduct: "Nike ",
     ammountOfProduct: 15000,
+    size:42
   },
   {
     productImage: goldShoe,
     nameOfProduct: "Nike gold shoe",
     ammountOfProduct: 25000,
+    size:46
   },
   {
     productImage: pumaFour,
     nameOfProduct: "Puma black shoe",
     ammountOfProduct: 20000,
+    size:48
   },
   {
     productImage: pumaFive,
     nameOfProduct: "Puma brown shoe",
     ammountOfProduct: 25000,
+    size:42
   },
   {
     productImage: pumaSix,
     nameOfProduct: "New Balance black and white shoe",
     ammountOfProduct: 15000,
+    size:47
   },
   {
     productImage: newBalanceOne,
     nameOfProduct: "New Balance black shoe",
     ammountOfProduct: 15000,
+    size:42
   },
   {
     productImage: newBalanceThree,
     nameOfProduct: "New Balance white shoe",
     ammountOfProduct: 10000,
+    size:41
   },
   {
     productImage: newBalanceFive,
     nameOfProduct: "New Balance blue shoe",
     ammountOfProduct: 50000,
+    size:47
   },
   {
     productImage: genz,
     nameOfProduct: "Nike shoe",
     ammountOfProduct: 30000,
+    size:48
   },
   {
     productImage: gucciTwoTwo,
     nameOfProduct: "New balance shoe",
     ammountOfProduct: 45000,
+    size:45
   },
   {
     productImage: gucciThree,
     nameOfProduct: "Puma shoe",
     ammountOfProduct: 30000,
+    size:42
   },
   {
     productImage: gucciFour,
     nameOfProduct: "Addidas white shoe",
     ammountOfProduct: 25000,
+    size:42
   },
   {
     productImage: gucciFive,
     nameOfProduct: "puma black shoe",
     ammountOfProduct: 40000,
+    size:44
   },
   {
     productImage: gucciFiveFive,
     nameOfProduct: "Nike white shoe",
     ammountOfProduct: 35000,
+    size:44
   },
   {
     productImage: gucciSix,
     nameOfProduct: "Reebok Brown shoe",
     ammountOfProduct: 20000,
+    size:47
   },
   {
     productImage: gucciSeven,
     nameOfProduct: "Gucci black shoe",
     ammountOfProduct: 15000,
+    size:48
   },
   {
     productImage: gucciEight,
     nameOfProduct: "Addidas black shoe",
     ammountOfProduct: 50000,
+    size:40
   },
   {
     productImage: gucciGray,
     nameOfProduct: "Gucci shoe",
     ammountOfProduct: 20000,
+    size:48
   },
   {
     productImage: redShoe,
     nameOfProduct: "Reebok red shoe",
     ammountOfProduct: 50000,
+    size:40
   },
 ];

@@ -54,7 +54,7 @@ Ensure you have the following installed:
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/your-username/foot-find.git
+    git clone https://github.com/TaiwoSoftware/foot-find.git
     ```
 
 2. Navigate to the project directory:
@@ -93,7 +93,7 @@ Ensure you have the following installed:
      yarn start
      ```
 
-   The application will now be accessible at [http://localhost:3000](http://localhost:3000).
+   The application will now be accessible at [http://localhost:5173](http://localhost:5173).
 
 ## Usage
 

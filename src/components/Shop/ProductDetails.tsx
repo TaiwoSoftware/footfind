@@ -30,7 +30,10 @@ export const ProductDetails: React.FC<ProductDetailsProps> = ({ addToCart }) => 
       <div className="flex flex-col items-center">
         <img src={product.productImage} alt={product.productImage} className="w-1/2" />
         <h1 className="text-2xl font-bold mt-4">{product.nameOfProduct}</h1>
-        <p className="text-gray-700 text-lg mt-2">${product.ammountOfProduct}</p>
+        <p className="text-gray-700 text-lg mt-2">₦{product.ammountOfProduct}</p>
+        <p className="text-blue-600 text-base mb-2">
+              size: {product.size}
+            </p>
         <button
           onClick={handleAddToCart}
           className="mt-4 px-6 py-2 bg-logo-orange text-white font-bold rounded-lg hover:bg-orange-700"

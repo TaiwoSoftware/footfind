@@ -11,7 +11,7 @@ export const Shop: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const isMobile = useMediaQuery({ maxWidth: 1024 });
   const onMobile = useMediaQuery({ maxWidth: 768 });
-
+  // const [sizeFilter, setSizeFilter] = useState<string>("")
   const storedData = localStorage.getItem("formData");
   const parsedData = storedData ? JSON.parse(storedData) : null;
   const fullName = parsedData?.fullName || "Guest";
@@ -44,6 +44,10 @@ export const Shop: React.FC = () => {
       );
     }
 
+    // if(size) {
+    //   filtered = filtered.filter((product) => product.size.toFixed(20))
+    // }
+
     setFilteredShoes(filtered);
   };
 
@@ -58,6 +62,12 @@ export const Shop: React.FC = () => {
     setBrandFilter(selectedBrand);
     filterProducts(searchItem, selectedBrand, colorFilter);
   };
+
+  // const handleSize = (e:React.ChangeEvent<HTMLInputElement>) => {
+  //   const selectedSize = e.target.value;
+  //   setSizeFilter(selectedSize);
+  //   filterProducts(searchItem, sizeFilter)
+  // }
   const handleColorFilter = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedColor = e.target.value;
     setColorFilter(selectedColor);
@@ -179,6 +189,23 @@ export const Shop: React.FC = () => {
                     )
                   )}
                 </div>
+                <h2 className="text-lg font-bold mt-6">Filter by Color</h2>
+                <div>
+                  {["White", "Black", "Red", "Cream", "Blue"].map(
+                    (color) => (
+                      <label key={color} className="block">
+                        <input
+                          type="radio"
+                          name="colorFilter"
+                          value={color}
+                          checked={colorFilter === color}
+                          onChange={handleColorFilter}
+                        />{" "}
+                        {color}
+                      </label>
+                    )
+                  )}
+                </div>
               </div>
             </div>
           )}
@@ -226,6 +253,23 @@ export const Shop: React.FC = () => {
                   )
                 )}
               </div>
+              <h2 className="text-lg font-bold mt-6">Filter by Size</h2>
+                <div>
+                  {["41-43", "43-45", "45-47", "47-50"].map(
+                    (color) => (
+                      <label key={color} className="block">
+                        <input
+                          type="radio"
+                          name="colorFilter"
+                          value={color}
+                          checked={colorFilter === color}
+                          onChange={handleColorFilter}
+                        />{" "}
+                        {color}
+                      </label>
+                    )
+                  )}
+                </div>
             </aside>
           )}
 
@@ -250,6 +294,9 @@ export const Shop: React.FC = () => {
                     </h3>
                     <p className="text-black font-semibold text-lg mt-1">
                       ₦{product.ammountOfProduct.toLocaleString()}
+                    </p>
+                    <p className="text-black font-light text-lg mt-1">
+                      Size: {product.size}
                     </p>
 
                     {/* Button */}
