@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { ProductJson } from "./ProductJson";
 import { useCart } from "../Shop/CartContext"; // 👈 using cart context
@@ -7,15 +7,26 @@ export const ProductDetails: React.FC = () => {
   const { index } = useParams<{ index: string }>();
   const navigate = useNavigate();
   const product = ProductJson[parseInt(index || "0", 10)];
-  const { addToCart } = useCart(); // 👈 pull in addToCart from context
+  const { addToCart } = useCart();
+
+  // 🆕 local state for selected size
+  const [selectedSize, setSelectedSize] = useState<string>("");
 
   if (!product) {
     return <h1>Product not found!</h1>;
   }
 
   const handleAddToCart = () => {
-    addToCart(product);
-    alert(`${product.nameOfProduct} added to cart!`); // ✅ backticks added
+    if (!selectedSize) {
+      alert("Please select a size before adding to cart.");
+      return;
+    }
+
+    // 🆕 attach selected size to product before adding
+    const productWithSize = { ...product, selectedSize };
+    addToCart(productWithSize);
+
+    alert(`${product.nameOfProduct} (Size: ${selectedSize}) added to cart!`);
     navigate("/cart");
   };
 
@@ -28,7 +39,23 @@ export const ProductDetails: React.FC = () => {
         <img src={product.productImage} alt={product.nameOfProduct} className="w-1/2" />
         <h1 className="text-2xl font-bold mt-4">{product.nameOfProduct}</h1>
         <p className="text-gray-700 text-lg mt-2">₦{product.ammountOfProduct}</p>
-        <p className="text-blue-600 text-base mb-2">size: {product.size}</p>
+
+        {/* 🆕 size picker */}
+        <label className="text-blue-600 text-base mb-1 mt-3" htmlFor="size-select">Select size:</label>
+        <select
+          id="size-select"
+          className="border border-gray-300 rounded px-3 py-2 mb-2"
+          value={selectedSize}
+          onChange={(e) => setSelectedSize(e.target.value)}
+        >
+          <option value="">-- Choose a size --</option>
+          {product.size.map((size) => (
+            <option key={size} value={size}>
+              {size}
+            </option>
+          ))}
+        </select>
+
         <button
           onClick={handleAddToCart}
           className="mt-4 px-6 py-2 bg-logo-orange text-white font-bold rounded-lg hover:bg-orange-700"

@@ -281,8 +281,12 @@ export const Shop: React.FC = () => {
 
           {/* Product Grid */}
           <section className="grid gap-4 grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 w-full p-2 md:p-4">
-            {[...filteredShoes, ...storedProduct].map((product, index) => (
-              <Link key={index} to={`/shop/${index}`} className="block">
+            {[...filteredShoes, ...storedProduct].map((product) => (
+              <Link
+                key={product.id}
+                to={`/shop/${product.id}`}
+                className="block"
+              >
                 <div className="bg-white shadow-md rounded-lg overflow-hidden border border-gray-200">
                   {/* Image Container */}
                   <div className="w-full aspect-[4/5] bg-gray-200 flex justify-center items-center">
@@ -300,9 +304,6 @@ export const Shop: React.FC = () => {
                     </h3>
                     <p className="text-black font-semibold text-lg mt-1">
                       ₦{product.ammountOfProduct.toLocaleString()}
-                    </p>
-                    <p className="text-black font-light text-lg mt-1">
-                      Size: {product.size}
                     </p>
 
                     {/* Button */}
