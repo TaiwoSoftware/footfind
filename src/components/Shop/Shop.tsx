@@ -4,9 +4,11 @@ import { useState } from "react";
 import { ProductJson } from "./ProductJson";
 import { useMediaQuery } from "react-responsive";
 import { FaShoppingCart } from "react-icons/fa";
+import { useCart } from "./CartContext";
 import "./shop.css";
 
 export const Shop: React.FC = () => {
+  const { cartItems } = useCart();
   const [colorFilter, setColorFilter] = useState<string>("");
   const [menuOpen, setMenuOpen] = useState(false);
   const isMobile = useMediaQuery({ maxWidth: 1024 });
@@ -91,8 +93,13 @@ export const Shop: React.FC = () => {
               <Link to={"/shop"}>Shop</Link>
               <Link to={"/profile"}>Profile</Link>
               <Link to={"/contact"}>Contact us</Link>
-              <Link to={"/cart"}>
-              <FaShoppingCart className="text-logo-orange text-3xl" />
+              <Link to="/cart" className="relative">
+                <FaShoppingCart className="text-logo-orange text-3xl" />
+                {cartItems.length > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                    {cartItems.length}
+                  </span>
+                )}
               </Link>
             </nav>
 
@@ -146,7 +153,14 @@ export const Shop: React.FC = () => {
                   <Link to={"/shop"}>Shop</Link>
                   <Link to={"/profile"}>Profile</Link>
                   <Link to={"/contact"}>Contact us</Link>
-                  <Link to={"/cart"}> <FaShoppingCart className="text-logo-orange text-3xl" /></Link>
+                  <Link to="/cart" className="relative">
+                    <FaShoppingCart className="text-logo-orange text-3xl" />
+                    {cartItems.length > 0 && (
+                      <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                        {cartItems.length}
+                      </span>
+                    )}
+                  </Link>
                 </nav>
 
                 <h2 className="text-lg font-bold mt-6">Filter by Brand</h2>
@@ -174,37 +188,33 @@ export const Shop: React.FC = () => {
                 </div>
                 <h2 className="text-lg font-bold mt-6">Filter by Color</h2>
                 <div>
-                  {["White", "Black", "Red", "Cream", "Blue"].map(
-                    (color) => (
-                      <label key={color} className="block">
-                        <input
-                          type="radio"
-                          name="colorFilter"
-                          value={color}
-                          checked={colorFilter === color}
-                          onChange={handleColorFilter}
-                        />{" "}
-                        {color}
-                      </label>
-                    )
-                  )}
+                  {["White", "Black", "Red", "Cream", "Blue"].map((color) => (
+                    <label key={color} className="block">
+                      <input
+                        type="radio"
+                        name="colorFilter"
+                        value={color}
+                        checked={colorFilter === color}
+                        onChange={handleColorFilter}
+                      />{" "}
+                      {color}
+                    </label>
+                  ))}
                 </div>
                 <h2 className="text-lg font-bold mt-6">Filter by Color</h2>
                 <div>
-                  {["White", "Black", "Red", "Cream", "Blue"].map(
-                    (color) => (
-                      <label key={color} className="block">
-                        <input
-                          type="radio"
-                          name="colorFilter"
-                          value={color}
-                          checked={colorFilter === color}
-                          onChange={handleColorFilter}
-                        />{" "}
-                        {color}
-                      </label>
-                    )
-                  )}
+                  {["White", "Black", "Red", "Cream", "Blue"].map((color) => (
+                    <label key={color} className="block">
+                      <input
+                        type="radio"
+                        name="colorFilter"
+                        value={color}
+                        checked={colorFilter === color}
+                        onChange={handleColorFilter}
+                      />{" "}
+                      {color}
+                    </label>
+                  ))}
                 </div>
               </div>
             </div>
@@ -238,38 +248,34 @@ export const Shop: React.FC = () => {
               ))}
               <h2 className="text-lg font-bold mt-6">Filter by Color</h2>
               <div>
-                {["White", "Black", "Red", "Cream", "Blue"].map(
-                  (color) => (
-                    <label key={color} className="block">
-                      <input
-                        type="radio"
-                        name="colorFilter"
-                        value={color}
-                        checked={colorFilter === color}
-                        onChange={handleColorFilter}
-                      />{" "}
-                      {color}
-                    </label>
-                  )
-                )}
+                {["White", "Black", "Red", "Cream", "Blue"].map((color) => (
+                  <label key={color} className="block">
+                    <input
+                      type="radio"
+                      name="colorFilter"
+                      value={color}
+                      checked={colorFilter === color}
+                      onChange={handleColorFilter}
+                    />{" "}
+                    {color}
+                  </label>
+                ))}
               </div>
               <h2 className="text-lg font-bold mt-6">Filter by Size</h2>
-                <div>
-                  {["41-43", "43-45", "45-47", "47-50"].map(
-                    (color) => (
-                      <label key={color} className="block">
-                        <input
-                          type="radio"
-                          name="colorFilter"
-                          value={color}
-                          checked={colorFilter === color}
-                          onChange={handleColorFilter}
-                        />{" "}
-                        {color}
-                      </label>
-                    )
-                  )}
-                </div>
+              <div>
+                {["41-43", "43-45", "45-47", "47-50"].map((color) => (
+                  <label key={color} className="block">
+                    <input
+                      type="radio"
+                      name="colorFilter"
+                      value={color}
+                      checked={colorFilter === color}
+                      onChange={handleColorFilter}
+                    />{" "}
+                    {color}
+                  </label>
+                ))}
+              </div>
             </aside>
           )}
 

@@ -1,21 +1,20 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import emailjs from "emailjs-com";
-import { ProductProps } from "./ProductInterface";
 import { PurchaseForm } from "./PurchaseForm";
+import { useCart } from "../Shop/CartContext"; // ✅ Import the context
 
 interface CartProps {
-  cart: ProductProps[];
   purchasedItems: number[];
   handlePurchase: (idx: number) => void;
 }
 
 export const Cart: React.FC<CartProps> = ({
-  cart,
   purchasedItems,
   handlePurchase,
 }) => {
   const [activeItem, setActiveItem] = useState<number | null>(null);
+  const { cartItems } = useCart(); // ✅ Use context state
 
   const getUserEmail = (): string | null => {
     try {
@@ -62,26 +61,33 @@ export const Cart: React.FC<CartProps> = ({
       );
   };
 
-  const saveToLocalStorage = (productName: string, productImage: string, ammountOfProduct: number) => {
-    // Retrieve existing purchased items from localStorage
-    const existingPurchases = JSON.parse(localStorage.getItem("purchasedItems") || "[]");
+  const saveToLocalStorage = (
+    productName: string,
+    productImage: string,
+    ammountOfProduct: number
+  ) => {
+    const existingPurchases = JSON.parse(
+      localStorage.getItem("purchasedItems") || "[]"
+    );
 
-    // Add the new item to the purchases array
     const updatedPurchases = [
       ...existingPurchases,
-      { productName, productImage,ammountOfProduct },
+      { productName, productImage, ammountOfProduct },
     ];
 
-    // Save the updated purchases array to localStorage
     localStorage.setItem("purchasedItems", JSON.stringify(updatedPurchases));
-    console.log("Item saved to localStorage:", { productName, productImage, ammountOfProduct });
+    console.log("Item saved to localStorage:", {
+      productName,
+      productImage,
+      ammountOfProduct,
+    });
   };
 
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold text-center mb-6">Cart Items</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {cart.map((item, idx) => (
+        {cartItems.map((item, idx) => (
           <motion.div
             key={idx}
             className="bg-white shadow-md rounded-lg p-4 flex flex-col items-center"
@@ -99,11 +105,9 @@ export const Cart: React.FC<CartProps> = ({
               {item.nameOfProduct}
             </h2>
             <p className="text-gray-600 text-base mb-2">
-              ${item.ammountOfProduct.toFixed(2)}
+              ₦{item.ammountOfProduct.toFixed(2)}
             </p>
-            <p className="text-blue-600 text-base mb-2">
-              size: {item.size}
-            </p>
+            <p className="text-blue-600 text-base mb-2">size: {item.size}</p>
 
             {purchasedItems.includes(idx) ? (
               <div className="text-green-500">
@@ -122,7 +126,11 @@ export const Cart: React.FC<CartProps> = ({
                     onSubmit={() => {
                       handlePurchase(idx);
                       sendOrderEmail(item.nameOfProduct, item.productImage);
-                      saveToLocalStorage(item.nameOfProduct, item.productImage, item.ammountOfProduct);
+                      saveToLocalStorage(
+                        item.nameOfProduct,
+                        item.productImage,
+                        item.ammountOfProduct
+                      );
                     }}
                   />
                 )}
