@@ -18,17 +18,20 @@ export const ProductDetails: React.FC = () => {
 
   const handleAddToCart = () => {
     if (!selectedSize) {
-      alert("Please select a size before adding to cart.");
+      alert("Please select a size before adding to cart!");
       return;
     }
-
-    // 🆕 attach selected size to product before adding
-    const productWithSize = { ...product, selectedSize };
-    addToCart(productWithSize);
-
-    alert(`${product.nameOfProduct} (Size: ${selectedSize}) added to cart!`);
+  
+    const itemWithSelectedSize = {
+      ...product,
+      selectedSize, // 👈 pass the selected size
+    };
+  
+    addToCart(itemWithSelectedSize);
+    alert(`${product.nameOfProduct} added to cart!`);
     navigate("/cart");
   };
+  
 
   return (
     <div className="container mx-auto p-4">
