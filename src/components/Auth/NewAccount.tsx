@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { MobileNav } from "../mobileComponents/MobileNav";
-
+import { supabase } from "./supabaseClient";
 export const NewAccount: React.FC = () => {
   const [value, setValue] = useState("");
   const [email, setEmail] = useState<string | undefined>("");
@@ -17,8 +17,15 @@ export const NewAccount: React.FC = () => {
 
   const navigate = useNavigate();
 
-  const handleSubmit = () => {
-    if (!value || !email || !phoneNumber || !password || !confirmPassword || !address) {
+  const handleSubmit = async () => {
+    if (
+      !value ||
+      !email ||
+      !phoneNumber ||
+      !password ||
+      !confirmPassword ||
+      !address
+    ) {
       alert("Please fill all fields.");
       return;
     }
@@ -33,12 +40,18 @@ export const NewAccount: React.FC = () => {
       email,
       phoneNumber,
       password,
-      address
+      address,
     };
 
-    localStorage.setItem("formData", JSON.stringify(dataToSave));
-    alert("Account created successfully!");
-    navigate("/login");
+    const { data, error } = await supabase.from("users").insert([dataToSave]);
+
+    if (error) {
+      console.error("Error saving user:", error.message);
+      alert("Failed to create account. Try again.");
+    } else {
+      alert("Account created successfully!");
+      navigate("/login");
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {

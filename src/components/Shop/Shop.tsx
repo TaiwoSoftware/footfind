@@ -1,26 +1,21 @@
 import { Link } from "react-router-dom";
 import { BiSearch, BiMenu, BiX } from "react-icons/bi";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ProductJson } from "./ProductJson";
 import { useMediaQuery } from "react-responsive";
 import { FaShoppingCart } from "react-icons/fa";
+import { supabase } from "../Auth/supabaseClient";
 import { useCart } from "./CartContext";
 import "./shop.css";
 
 export const Shop: React.FC = () => {
+  const [shortName, setShortName] = useState("Guest");
   const { cartItems } = useCart();
   const [colorFilter, setColorFilter] = useState<string>("");
   const [menuOpen, setMenuOpen] = useState(false);
   const isMobile = useMediaQuery({ maxWidth: 1024 });
   const onMobile = useMediaQuery({ maxWidth: 768 });
-  // const [sizeFilter, setSizeFilter] = useState<string>("")
-  const storedData = localStorage.getItem("formData");
-  const parsedData = storedData ? JSON.parse(storedData) : null;
-  const fullName = parsedData?.fullName || "Guest";
-  const shortName = fullName.slice(0, 7);
-  const storedProduct = JSON.parse(localStorage.getItem("products") || "[]");
-  // const isRegistered = storedData !== null;
-
+  const [isRegistered, setIsRegistered] = useState(false);
   const [searchItem, setSearchItem] = useState<string>("");
   const [brandFilter, setBrandFilter] = useState<string>("");
   const [filteredShoes, setFilteredShoes] = useState(ProductJson);
@@ -46,10 +41,6 @@ export const Shop: React.FC = () => {
       );
     }
 
-    // if(size) {
-    //   filtered = filtered.filter((product) => product.size.toFixed(20))
-    // }
-
     setFilteredShoes(filtered);
   };
 
@@ -64,17 +55,49 @@ export const Shop: React.FC = () => {
     setBrandFilter(selectedBrand);
     filterProducts(searchItem, selectedBrand, colorFilter);
   };
-
-  // const handleSize = (e:React.ChangeEvent<HTMLInputElement>) => {
-  //   const selectedSize = e.target.value;
-  //   setSizeFilter(selectedSize);
-  //   filterProducts(searchItem, sizeFilter)
-  // }
   const handleColorFilter = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedColor = e.target.value;
     setColorFilter(selectedColor);
     filterProducts(searchItem, brandFilter, selectedColor);
   };
+  useEffect(() => {
+    const checkUser = async () => {
+      const email = localStorage.getItem("userEmail");
+      if (!email) return;
+
+      const { data, error } = await supabase
+        .from("users")
+        .select("id")
+        .eq("email", email)
+        .single();
+
+      if (data && !error) {
+        setIsRegistered(true);
+      } else {
+        setIsRegistered(false);
+      }
+    };
+
+    checkUser();
+    const fetchUser = async () => {
+      const email = localStorage.getItem("userEmail");
+      if (!email) return;
+
+      const { data, error } = await supabase
+        .from("users")
+        .select("fullName")
+        .eq("email", email)
+        .single();
+
+      if (data && data.fullName) {
+        const name = data.fullName.slice(0, 7);
+        setShortName(name);
+      }
+    };
+
+    fetchUser();
+  }, []);
+  
 
   return (
     <>
@@ -261,34 +284,18 @@ export const Shop: React.FC = () => {
                   </label>
                 ))}
               </div>
-              <h2 className="text-lg font-bold mt-6">Filter by Size</h2>
-              <div>
-                {["41-43", "43-45", "45-47", "47-50"].map((color) => (
-                  <label key={color} className="block">
-                    <input
-                      type="radio"
-                      name="colorFilter"
-                      value={color}
-                      checked={colorFilter === color}
-                      onChange={handleColorFilter}
-                    />{" "}
-                    {color}
-                  </label>
-                ))}
-              </div>
             </aside>
           )}
 
           {/* Product Grid */}
           <section className="grid gap-4 grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 w-full p-2 md:p-4">
-            {[...filteredShoes, ...storedProduct].map((product) => (
+            {ProductJson.map((product) => (
               <Link
                 key={product.id}
                 to={`/shop/${product.id}`}
                 className="block"
               >
                 <div className="bg-white shadow-md rounded-lg overflow-hidden border border-gray-200">
-                  {/* Image Container */}
                   <div className="w-full aspect-[4/5] bg-gray-200 flex justify-center items-center">
                     <img
                       src={product.productImage}
@@ -297,7 +304,6 @@ export const Shop: React.FC = () => {
                     />
                   </div>
 
-                  {/* Product Details */}
                   <div className="p-4">
                     <h3 className="text-logo-orange text-md font-bold leading-tight truncate">
                       {product.nameOfProduct}
@@ -306,15 +312,14 @@ export const Shop: React.FC = () => {
                       ₦{product.ammountOfProduct.toLocaleString()}
                     </p>
 
-                    {/* Button */}
                     <div className="mt-4">
                       <button
                         className={`w-full font-semibold py-2 border rounded-lg ${
-                          storedData
+                          isRegistered
                             ? "text-logo-orange border-logo-orange hover:bg-blue-100"
                             : "bg-gray-300 text-gray-500 cursor-not-allowed"
                         }`}
-                        disabled={!storedData} // Disable button if user is not registered
+                        disabled={!isRegistered}
                       >
                         Shop now
                       </button>
@@ -329,3 +334,4 @@ export const Shop: React.FC = () => {
     </>
   );
 };
+

@@ -2,28 +2,33 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { NavContainer } from "../NavContainer";
 import { MobileNav } from "../mobileComponents/MobileNav";
-
+import { supabase } from "./supabaseClient";
 export const Login: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
-  const handleLogin = () => {
-    // Retrieve stored user data from localStorage
-    const storedData = localStorage.getItem("formData");
+  const handleLogin = async () => {
+    if (!email || !password) {
+      setError("Please enter both email and password.");
+      return;
+    }
 
-    if (!storedData) {
+    const { data, error } = await supabase
+      .from("users")
+      .select("*")
+      .eq("email", email)
+      .single(); // expect only one user
+
+    if (error || !data) {
       setError("No account found. Please sign up.");
       return;
     }
 
-    // Parse stored data
-    const userData = JSON.parse(storedData);
-
-    // Check if email and password match
-    if (userData.email === email && userData.password === password) {
+    if (data.password === password) {
       setError(null);
+      localStorage.setItem("userEmail", email);
       alert("Login successful!");
       navigate("/shop");
     } else {

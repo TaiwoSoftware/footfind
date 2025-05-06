@@ -292,7 +292,7 @@ export const ProductJson: ProductProps[] = [
   {
     id:29,
     productImage: gucciOne,
-    nameOfProduct: "Gucci Black shoe",
+    nameOfProduct: "Gucci White shoe",
     ammountOfProduct: 10000,
     size:["38","39","40","41","42","43","44","45","46","47"]
   },
