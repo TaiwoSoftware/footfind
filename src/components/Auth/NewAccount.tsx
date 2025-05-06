@@ -43,7 +43,7 @@ export const NewAccount: React.FC = () => {
       address,
     };
 
-    const { data, error } = await supabase.from("users").insert([dataToSave]);
+    const { error } = await supabase.from("users").insert([dataToSave]);
 
     if (error) {
       console.error("Error saving user:", error.message);

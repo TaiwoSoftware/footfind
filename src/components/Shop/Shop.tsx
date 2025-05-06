@@ -83,7 +83,7 @@ export const Shop: React.FC = () => {
       const email = localStorage.getItem("userEmail");
       if (!email) return;
 
-      const { data, error } = await supabase
+      const { data } = await supabase
         .from("users")
         .select("fullName")
         .eq("email", email)

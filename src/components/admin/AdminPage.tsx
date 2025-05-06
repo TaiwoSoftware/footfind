@@ -1,22 +1,45 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
+import { supabase } from "../Auth/supabaseClient";
 import { FiMenu } from "react-icons/fi"; // Mobile menu icon
 
 const AdminPage: React.FC = () => {
   const [user, setUser] = useState<any>(null);
   const [orders, setOrders] = useState<any[]>([]);
+
   const [menuOpen, setMenuOpen] = useState(false);
 
   // Fetch data from localStorage on component mount
   useEffect(() => {
-    setUser(fetchUserData("formData"));
-    setOrders(fetchOrdersData("purchasedItems"));
+    const fetchData = async () => {
+      const userData = await fetchUserDataFromSupabase();
+      const ordersData = fetchOrdersData("purchasedItems");
+  
+      setUser(userData);
+      setOrders(ordersData);
+    };
+  
+    fetchData();
   }, []);
-
-  const fetchUserData = (key: string) => {
-    const data = localStorage.getItem(key);
-    return data ? JSON.parse(data) : null;
+  
+  const fetchUserDataFromSupabase = async () => {
+    const email = localStorage.getItem("userEmail"); // 👈 assume you're storing email after login
+  
+    if (!email) return null;
+  
+    const { data, error } = await supabase
+      .from("users")
+      .select("id, fullName, email, phoneNumber, address, created_at") // exclude password
+      .eq("email", email)
+      .single();
+  
+    if (error) {
+      console.error("Error fetching user from Supabase:", error.message);
+      return null;
+    }
+  
+    return data;
   };
 
   const fetchOrdersData = (key: string) => {
