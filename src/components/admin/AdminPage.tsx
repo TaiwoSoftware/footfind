@@ -4,41 +4,45 @@ import { Link } from "react-router-dom";
 import { supabase } from "../Auth/supabaseClient";
 import { FiMenu } from "react-icons/fi"; // Mobile menu icon
 
-const AdminPage: React.FC = () => {
-  const [user, setUser] = useState<any>(null);
-  const [orders, setOrders] = useState<any[]>([]);
+interface User {
+  id: string;
+  fullName: string;
+  email: string;
+  phoneNumber: string;
+  address: string;
+  created_at: string;
+}
 
+const AdminPage: React.FC = () => {
+  const [users, setUsers] = useState<User[]>([]);
+  const [orders, setOrders] = useState<any[]>([]);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // Fetch data from localStorage on component mount
   useEffect(() => {
     const fetchData = async () => {
       const userData = await fetchUserDataFromSupabase();
       const ordersData = fetchOrdersData("purchasedItems");
-  
-      setUser(userData);
+
+      if (userData) {
+        setUsers(userData);
+      }
+
       setOrders(ordersData);
     };
-  
+
     fetchData();
   }, []);
-  
+
   const fetchUserDataFromSupabase = async () => {
-    const email = localStorage.getItem("userEmail"); // 👈 assume you're storing email after login
-  
-    if (!email) return null;
-  
     const { data, error } = await supabase
       .from("users")
-      .select("id, fullName, email, phoneNumber, address, created_at") // exclude password
-      .eq("email", email)
-      .single();
-  
+      .select("id, fullName, email, phoneNumber, address, created_at");
+
     if (error) {
-      console.error("Error fetching user from Supabase:", error.message);
+      console.error("Error fetching users from Supabase:", error.message);
       return null;
     }
-  
+
     return data;
   };
 
@@ -61,7 +65,6 @@ const AdminPage: React.FC = () => {
       <AnimatePresence>
         {menuOpen && (
           <>
-            {/* Background Overlay */}
             <motion.div
               className="fixed inset-0 bg-black bg-opacity-50 z-40"
               initial={{ opacity: 0 }}
@@ -69,8 +72,6 @@ const AdminPage: React.FC = () => {
               exit={{ opacity: 0 }}
               onClick={() => setMenuOpen(false)}
             />
-
-            {/* Slide-in Menu */}
             <motion.div
               className="fixed top-0 left-0 h-full w-64 bg-white shadow-lg z-50 p-5"
               initial={{ x: "-100%" }}
@@ -85,24 +86,12 @@ const AdminPage: React.FC = () => {
                 ✖ Close
               </button>
               <nav>
-              <p>
-                  <Link to={"/"}>Home</Link>
-                </p>
-                <p>
-                  <Link to={"/about"}>About</Link>
-                </p>
-                <p>
-                  <Link to={"/shop"}>Shop</Link>
-                </p>
-                <p>
-                  <Link to={"/profile"}>Profile</Link>
-                </p>
-                <p>
-                  <Link to={"/contact"}>Contact us</Link>
-                </p>
-                <p>
-                  <Link to={"/admin"}>Admin</Link>
-                </p>
+                <p><Link to={"/"}>Home</Link></p>
+                <p><Link to={"/about"}>About</Link></p>
+                <p><Link to={"/shop"}>Shop</Link></p>
+                <p><Link to={"/profile"}>Profile</Link></p>
+                <p><Link to={"/contact"}>Contact us</Link></p>
+                <p><Link to={"/admin"}>Admin</Link></p>
               </nav>
             </motion.div>
           </>
@@ -128,21 +117,15 @@ const AdminPage: React.FC = () => {
             className="bg-white shadow-md p-4 rounded-lg"
           >
             <h3 className="text-xl font-bold mb-4">User Information</h3>
-            {user ? (
-              <div>
-                <p>
-                  <strong>Name:</strong> {user.fullName}
-                </p>
-                <p>
-                  <strong>Email:</strong> {user.email}
-                </p>
-                <p>
-                  <strong>Phone:</strong> {user.phoneNumber}
-                </p>
-                <p>
-                  <strong>Address:</strong> {user.address}
-                </p>
-              </div>
+            {users.length > 0 ? (
+              users.map((user) => (
+                <div key={user.id} className="mb-4 border-b pb-2">
+                  <p><strong>Name:</strong> {user.fullName}</p>
+                  <p><strong>Email:</strong> {user.email}</p>
+                  <p><strong>Phone:</strong> {user.phoneNumber}</p>
+                  <p><strong>Address:</strong> {user.address}</p>
+                </div>
+              ))
             ) : (
               <p>No user data found.</p>
             )}
@@ -164,20 +147,14 @@ const AdminPage: React.FC = () => {
                     whileHover={{ scale: 1.05 }}
                     className="flex items-center p-2 border-b"
                   >
-                    {/* Product Image */}
                     <img
                       src={order.productImage}
                       alt={order.productName}
                       className="w-16 h-16 mr-4 rounded-lg"
                     />
-                    {/* Product Details */}
                     <div>
-                      <p>
-                        <strong>Product:</strong> {order.productName}
-                      </p>
-                      <p>
-                        <strong>Price:</strong> ${order.ammountOfProduct}
-                      </p>
+                      <p><strong>Product:</strong> {order.productName}</p>
+                      <p><strong>Price:</strong> ${order.ammountOfProduct}</p>
                     </div>
                   </motion.li>
                 ))}

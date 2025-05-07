@@ -108,8 +108,10 @@ export const Cart: React.FC<CartProps> = ({
               ₦{item.ammountOfProduct.toFixed(2)}
             </p>
             {item.selectedSize && (
-  <p className="text-blue-600 text-base mb-2">Size: {item.selectedSize}</p>
-)}
+              <p className="text-blue-600 text-base mb-2">
+                Size: {item.selectedSize}
+              </p>
+            )}
 
             {purchasedItems.includes(idx) ? (
               <div className="text-green-500">
