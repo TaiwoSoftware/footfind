@@ -13,10 +13,19 @@ interface User {
   created_at: string;
 }
 
+interface Order {
+  id: string;
+  user_id: string; // Assuming you have user_id to map orders to users
+  product_name: string;
+  price: number;
+  size?: string;
+  product_image: string;
+}
+
 // ... (imports stay the same)
 const AdminPage: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
-  const [orders, setOrders] = useState<any[]>([]);
+  const [orders, setOrders] = useState<Order[]>([]);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -150,6 +159,31 @@ const AdminPage: React.FC = () => {
                   <p>
                     <strong>Address:</strong> {user.address}
                   </p>
+
+                  {/* Orders per User */}
+                  <h4 className="mt-4 text-lg font-semibold">Orders for {user.fullName}</h4>
+                  {orders
+                    .filter((order) => order.user_id === user.id)
+                    .map((order) => (
+                      <div key={order.id} className="mb-4 border-b pb-2">
+                        <p>
+                          <strong>Product:</strong> {order.product_name}
+                        </p>
+                        <p>
+                          <strong>Price:</strong> ₦{order.price}
+                        </p>
+                        {order.size && (
+                          <p>
+                            <strong>Size:</strong> {order.size}
+                          </p>
+                        )}
+                        <img
+                          src={order.product_image}
+                          alt={order.product_name}
+                          className="w-16 h-16 mt-2 rounded-lg"
+                        />
+                      </div>
+                    ))}
                 </div>
               ))
             ) : (
@@ -164,7 +198,7 @@ const AdminPage: React.FC = () => {
             transition={{ duration: 0.5 }}
             className="bg-white shadow-md p-4 rounded-lg"
           >
-            <h3 className="text-xl font-bold mb-4">Orders</h3>
+            <h3 className="text-xl font-bold mb-4">All Orders</h3>
             {orders.length > 0 ? (
               <ul>
                 {orders.map((order, index) => (
@@ -175,7 +209,7 @@ const AdminPage: React.FC = () => {
                   >
                     <img
                       src={order.product_image}
-                      alt={order.productName}
+                      alt={order.product_name}
                       className="w-16 h-16 mr-4 rounded-lg"
                     />
                     <div>
@@ -185,7 +219,7 @@ const AdminPage: React.FC = () => {
                       <p>
                         <strong>Price:</strong> ₦{order.price}
                       </p>
-                      {order.selectedSize && (
+                      {order.size && (
                         <p>
                           <strong>Size:</strong> {order.size}
                         </p>
