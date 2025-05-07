@@ -68,9 +68,7 @@ const Profile: React.FC = () => {
                 <p>
                   <Link to={"/contact"}>Contact us</Link>
                 </p>
-                <p>
-                  <Link to={"/admin"}>Admin</Link>
-                </p>
+              
               </nav>
             </motion.div>
           </>
