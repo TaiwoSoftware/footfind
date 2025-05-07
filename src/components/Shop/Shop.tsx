@@ -18,7 +18,7 @@ export const Shop: React.FC = () => {
   const [isRegistered, setIsRegistered] = useState(false);
   const [searchItem, setSearchItem] = useState<string>("");
   const [brandFilter, setBrandFilter] = useState<string>("");
-  const [filteredShoes, setFilteredShoes] = useState(ProductJson);
+  const [, setFilteredShoes] = useState(ProductJson);
 
   const filterProducts = (searchTerm: string, brand: string, color: string) => {
     let filtered = ProductJson;
