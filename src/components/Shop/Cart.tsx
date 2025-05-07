@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import emailjs from "emailjs-com";
 import { PurchaseForm } from "./PurchaseForm";
+import { supabase } from "../Auth/supabaseClient";
 import { useCart } from "../Shop/CartContext"; // ✅ Import the context
 
 interface CartProps {
@@ -61,26 +62,27 @@ export const Cart: React.FC<CartProps> = ({
       );
   };
 
-  const saveToLocalStorage = (
+  // ✨ New: Save to Supabase
+  const saveOrderToSupabase = async (
     productName: string,
     productImage: string,
-    ammountOfProduct: number
+    ammountOfProduct: number,
+    selectedSize: string
   ) => {
-    const existingPurchases = JSON.parse(
-      localStorage.getItem("purchasedItems") || "[]"
-    );
+    const { error } = await supabase.from("orders").insert([
+      {
+        product_name: productName,
+        product_image: productImage,
+        price: ammountOfProduct,
+        size: selectedSize,
+      },
+    ]);
 
-    const updatedPurchases = [
-      ...existingPurchases,
-      { productName, productImage, ammountOfProduct },
-    ];
-
-    localStorage.setItem("purchasedItems", JSON.stringify(updatedPurchases));
-    console.log("Item saved to localStorage:", {
-      productName,
-      productImage,
-      ammountOfProduct,
-    });
+    if (error) {
+      console.error("Failed to save order to Supabase:", error.message);
+    } else {
+      console.log("Order saved to Supabase successfully!");
+    }
   };
 
   return (
@@ -130,10 +132,11 @@ export const Cart: React.FC<CartProps> = ({
                     onSubmit={() => {
                       handlePurchase(idx);
                       sendOrderEmail(item.nameOfProduct, item.productImage);
-                      saveToLocalStorage(
+                      saveOrderToSupabase(
                         item.nameOfProduct,
                         item.productImage,
-                        item.ammountOfProduct
+                        item.ammountOfProduct,
+                        item.selectedSize || "Not specified"
                       );
                     }}
                   />
