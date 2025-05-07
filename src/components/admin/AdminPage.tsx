@@ -13,6 +13,7 @@ interface User {
   created_at: string;
 }
 
+// ... (imports stay the same)
 const AdminPage: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [orders, setOrders] = useState<any[]>([]);
@@ -21,13 +22,10 @@ const AdminPage: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       const userData = await fetchUserDataFromSupabase();
-      const ordersData = fetchOrdersData("purchasedItems");
+      const ordersData = await fetchOrdersDataFromSupabase(); // 🔁 updated to use Supabase
 
-      if (userData) {
-        setUsers(userData);
-      }
-
-      setOrders(ordersData);
+      if (userData) setUsers(userData);
+      if (ordersData) setOrders(ordersData);
     };
 
     fetchData();
@@ -46,9 +44,18 @@ const AdminPage: React.FC = () => {
     return data;
   };
 
-  const fetchOrdersData = (key: string) => {
-    const data = localStorage.getItem(key);
-    return data ? JSON.parse(data) : [];
+  const fetchOrdersDataFromSupabase = async () => {
+    const { data, error } = await supabase
+      .from("orders")
+      .select("*")
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      console.error("Error fetching orders from Supabase:", error.message);
+      return [];
+    }
+
+    return data;
   };
 
   return (
@@ -86,12 +93,24 @@ const AdminPage: React.FC = () => {
                 ✖ Close
               </button>
               <nav>
-                <p><Link to={"/"}>Home</Link></p>
-                <p><Link to={"/about"}>About</Link></p>
-                <p><Link to={"/shop"}>Shop</Link></p>
-                <p><Link to={"/profile"}>Profile</Link></p>
-                <p><Link to={"/contact"}>Contact us</Link></p>
-                <p><Link to={"/admin"}>Admin</Link></p>
+                <p>
+                  <Link to={"/"}>Home</Link>
+                </p>
+                <p>
+                  <Link to={"/about"}>About</Link>
+                </p>
+                <p>
+                  <Link to={"/shop"}>Shop</Link>
+                </p>
+                <p>
+                  <Link to={"/profile"}>Profile</Link>
+                </p>
+                <p>
+                  <Link to={"/contact"}>Contact us</Link>
+                </p>
+                <p>
+                  <Link to={"/admin"}>Admin</Link>
+                </p>
               </nav>
             </motion.div>
           </>
@@ -107,9 +126,8 @@ const AdminPage: React.FC = () => {
           </button>
         </Link>
 
-        {/* Grid layout */}
         <div className="grid lg:grid-cols-2 gap-6">
-          {/* User Section */}
+          {/* User Info */}
           <motion.div
             initial={{ opacity: 0, x: -100 }}
             animate={{ opacity: 1, x: 0 }}
@@ -120,10 +138,18 @@ const AdminPage: React.FC = () => {
             {users.length > 0 ? (
               users.map((user) => (
                 <div key={user.id} className="mb-4 border-b pb-2">
-                  <p><strong>Name:</strong> {user.fullName}</p>
-                  <p><strong>Email:</strong> {user.email}</p>
-                  <p><strong>Phone:</strong> {user.phoneNumber}</p>
-                  <p><strong>Address:</strong> {user.address}</p>
+                  <p>
+                    <strong>Name:</strong> {user.fullName}
+                  </p>
+                  <p>
+                    <strong>Email:</strong> {user.email}
+                  </p>
+                  <p>
+                    <strong>Phone:</strong> {user.phoneNumber}
+                  </p>
+                  <p>
+                    <strong>Address:</strong> {user.address}
+                  </p>
                 </div>
               ))
             ) : (
@@ -131,7 +157,7 @@ const AdminPage: React.FC = () => {
             )}
           </motion.div>
 
-          {/* Orders Section */}
+          {/* Orders */}
           <motion.div
             initial={{ opacity: 0, x: 100 }}
             animate={{ opacity: 1, x: 0 }}
@@ -148,13 +174,22 @@ const AdminPage: React.FC = () => {
                     className="flex items-center p-2 border-b"
                   >
                     <img
-                      src={order.productImage}
+                      src={order.product_image}
                       alt={order.productName}
                       className="w-16 h-16 mr-4 rounded-lg"
                     />
                     <div>
-                      <p><strong>Product:</strong> {order.productName}</p>
-                      <p><strong>Price:</strong> ${order.ammountOfProduct}</p>
+                      <p>
+                        <strong>Product:</strong> {order.product_name}
+                      </p>
+                      <p>
+                        <strong>Price:</strong> ₦{order.price}
+                      </p>
+                      {order.selectedSize && (
+                        <p>
+                          <strong>Size:</strong> {order.size}
+                        </p>
+                      )}
                     </div>
                   </motion.li>
                 ))}
