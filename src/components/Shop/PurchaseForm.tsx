@@ -1,10 +1,11 @@
 import React, { useState } from "react";
+import { supabase } from "../Auth/supabaseClient";
 
 interface PurchaseFormProps {
   onSubmit: () => void;
 }
 
-export const PurchaseForm: React.FC<PurchaseFormProps> = ({ onSubmit }) => {
+export const PurchaseForm: React.FC<PurchaseFormProps> = ({ onSubmit}) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -25,13 +26,31 @@ export const PurchaseForm: React.FC<PurchaseFormProps> = ({ onSubmit }) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     setShowModal(true);
 
     // Simulate server-side processing with a 20-second delay
-    setTimeout(() => {
+    setTimeout(async () => {
+      // Create a new order in Supabase, associating the order with the user_id
+      const { data, error } = await supabase
+        .from("orders")
+        .insert([
+          {
+            product_name: "Example Product", // Replace with actual product name
+            price: 100, // Replace with actual price
+            product_image: "example-image.jpg", // Replace with actual image URL
+            created_at: new Date().toISOString(),
+          },
+        ]);
+
+      if (error) {
+        console.error("Error creating order:", error.message);
+      } else {
+        console.log("Order created:", data);
+      }
+
       setIsLoading(false);
       setShowPurchasedMark(true); // Show the purchased mark after 20 seconds
 

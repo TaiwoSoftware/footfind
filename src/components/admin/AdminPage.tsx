@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { supabase } from "../Auth/supabaseClient";
-import { FiMenu } from "react-icons/fi"; // Mobile menu icon
+import { FiMenu } from "react-icons/fi";
 
 interface User {
   id: string;
@@ -15,14 +15,15 @@ interface User {
 
 interface Order {
   id: string;
-  user_id: string; // Assuming you have user_id to map orders to users
+  user_id: string;
   product_name: string;
   price: number;
   size?: string;
   product_image: string;
+  created_at: string;
+  userName?: string; // Optional, will be filled after merge
 }
 
-// ... (imports stay the same)
 const AdminPage: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [orders, setOrders] = useState<Order[]>([]);
@@ -31,10 +32,22 @@ const AdminPage: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       const userData = await fetchUserDataFromSupabase();
-      const ordersData = await fetchOrdersDataFromSupabase(); // 🔁 updated to use Supabase
+      const ordersData = await fetchOrdersDataFromSupabase();
 
       if (userData) setUsers(userData);
-      if (ordersData) setOrders(ordersData);
+
+      if (ordersData && userData) {
+        // Add userName (fullName) to orders
+        const enrichedOrders = ordersData.map((order) => {
+          const user = userData.find((u) => u.id === order.user_id);
+          return {
+            ...order,
+            userName: user ? user.fullName : "Unknown", // Set fullName from users table
+          };
+        });
+
+        setOrders(enrichedOrders);
+      }
     };
 
     fetchData();
@@ -67,9 +80,17 @@ const AdminPage: React.FC = () => {
     return data;
   };
 
+  const formatDate = (dateStr: string) => {
+    const date = new Date(dateStr);
+    return date.toLocaleDateString("en-NG", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
+  };
+
   return (
     <div className="relative">
-      {/* Mobile Menu Button */}
       <button
         className="absolute top-4 right-4 text-black text-3xl sm:flex lg:hidden z-50"
         onClick={() => setMenuOpen(true)}
@@ -77,7 +98,6 @@ const AdminPage: React.FC = () => {
         <FiMenu />
       </button>
 
-      {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {menuOpen && (
           <>
@@ -102,31 +122,18 @@ const AdminPage: React.FC = () => {
                 ✖ Close
               </button>
               <nav>
-                <p>
-                  <Link to={"/"}>Home</Link>
-                </p>
-                <p>
-                  <Link to={"/about"}>About</Link>
-                </p>
-                <p>
-                  <Link to={"/shop"}>Shop</Link>
-                </p>
-                <p>
-                  <Link to={"/profile"}>Profile</Link>
-                </p>
-                <p>
-                  <Link to={"/contact"}>Contact us</Link>
-                </p>
-                <p>
-                  <Link to={"/admin"}>Admin</Link>
-                </p>
+                <p><Link to={"/"}>Home</Link></p>
+                <p><Link to={"/about"}>About</Link></p>
+                <p><Link to={"/shop"}>Shop</Link></p>
+                <p><Link to={"/profile"}>Profile</Link></p>
+                <p><Link to={"/contact"}>Contact us</Link></p>
+                <p><Link to={"/admin"}>Admin</Link></p>
               </nav>
             </motion.div>
           </>
         )}
       </AnimatePresence>
 
-      {/* Main Content */}
       <div className="container mx-auto p-6">
         <h2 className="text-3xl font-bold text-center mb-6">Admin Dashboard</h2>
         <Link to={"/newIn"}>
@@ -147,43 +154,33 @@ const AdminPage: React.FC = () => {
             {users.length > 0 ? (
               users.map((user) => (
                 <div key={user.id} className="mb-4 border-b pb-2">
-                  <p>
-                    <strong>Name:</strong> {user.fullName}
-                  </p>
-                  <p>
-                    <strong>Email:</strong> {user.email}
-                  </p>
-                  <p>
-                    <strong>Phone:</strong> {user.phoneNumber}
-                  </p>
-                  <p>
-                    <strong>Address:</strong> {user.address}
-                  </p>
+                  <p><strong>Name:</strong> {user.fullName}</p>
+                  <p><strong>Email:</strong> {user.email}</p>
+                  <p><strong>Phone:</strong> {user.phoneNumber}</p>
+                  <p><strong>Address:</strong> {user.address}</p>
 
-                  {/* Orders per User */}
                   <h4 className="mt-4 text-lg font-semibold">Orders for {user.fullName}</h4>
-                  {orders
-                    .filter((order) => order.user_id === user.id)
-                    .map((order) => (
-                      <div key={order.id} className="mb-4 border-b pb-2">
-                        <p>
-                          <strong>Product:</strong> {order.product_name}
-                        </p>
-                        <p>
-                          <strong>Price:</strong> ₦{order.price}
-                        </p>
-                        {order.size && (
-                          <p>
-                            <strong>Size:</strong> {order.size}
-                          </p>
-                        )}
-                        <img
-                          src={order.product_image}
-                          alt={order.product_name}
-                          className="w-16 h-16 mt-2 rounded-lg"
-                        />
-                      </div>
-                    ))}
+                  {orders.filter((order) => order.user_id === user.id).length > 0 ? (
+                    orders
+                      .filter((order) => order.user_id === user.id)
+                      .map((order) => (
+                        <div key={order.id} className="mb-4 border-b pb-2">
+                          <p><strong>Product:</strong> {order.product_name}</p>
+                          <p><strong>Price:</strong> ₦{order.price}</p>
+                          {order.size && (
+                            <p><strong>Size:</strong> {order.size}</p>
+                          )}
+                          <p><strong>Date:</strong> {formatDate(order.created_at)}</p>
+                          <img
+                            src={order.product_image}
+                            alt={order.product_name}
+                            className="w-16 h-16 mt-2 rounded-lg"
+                          />
+                        </div>
+                      ))
+                  ) : (
+                    <p></p>
+                  )}
                 </div>
               ))
             ) : (
@@ -191,7 +188,7 @@ const AdminPage: React.FC = () => {
             )}
           </motion.div>
 
-          {/* Orders */}
+          {/* All Orders */}
           <motion.div
             initial={{ opacity: 0, x: 100 }}
             animate={{ opacity: 1, x: 0 }}
@@ -213,17 +210,12 @@ const AdminPage: React.FC = () => {
                       className="w-16 h-16 mr-4 rounded-lg"
                     />
                     <div>
-                      <p>
-                        <strong>Product:</strong> {order.product_name}
-                      </p>
-                      <p>
-                        <strong>Price:</strong> ₦{order.price}
-                      </p>
+                      <p><strong>Product:</strong> {order.product_name}</p>
+                      <p><strong>Price:</strong> ₦{order.price}</p>
                       {order.size && (
-                        <p>
-                          <strong>Size:</strong> {order.size}
-                        </p>
+                        <p><strong>Size:</strong> {order.size}</p>
                       )}
+                      <p><strong>Date:</strong> {formatDate(order.created_at)}</p>
                     </div>
                   </motion.li>
                 ))}
